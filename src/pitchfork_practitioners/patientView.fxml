@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: maroon;" type="Pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.patientViewController">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: maroon;" type="Pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.PatientViewController">
    <children>
       <TextField layoutX="212.0" layoutY="338.0" prefHeight="86.0" prefWidth="282.0" />
       <Button layoutX="765.0" layoutY="119.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="206.0" text="Save" />

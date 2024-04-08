@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="371.0" prefWidth="613.0" style="-fx-background-color: maroon;" type="Pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.nurseViewController">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="371.0" prefWidth="613.0" style="-fx-background-color: maroon;" type="Pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.NurseViewController">
    <children>
       <Button fx:id="pastVisitsButton" layoutX="21.0" layoutY="2.0" mnemonicParsing="false" onAction="#handlePastVisitsButtonAction" text="Past visits" />
       <Button fx:id="messageCenterButton" layoutX="5.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleMessageCenterButtonAction" text="Message center" />
