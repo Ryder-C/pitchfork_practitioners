@@ -1,5 +1,5 @@
 package pitchfork_practitioners;
 
-public class doctor extends user{
+public class Doctor extends User{
 
 }

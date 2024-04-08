@@ -1,5 +1,5 @@
 package pitchfork_practitioners;
 
-public class doctorViewController {
+public class DoctorViewController {
 
 }

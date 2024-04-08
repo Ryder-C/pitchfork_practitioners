@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 
-public class nurseViewController {
+public class NurseViewController {
 
     @FXML
     private Button pastVisitsButton;

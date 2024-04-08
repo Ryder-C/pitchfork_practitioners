@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loginPageController {
+public class LoginPageController {
     @FXML
     private ImageView logoImageView;
     @FXML

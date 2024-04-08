@@ -1,6 +1,6 @@
 package pitchfork_practitioners;
 
-public class user {
+public class User {
 	protected String firstName;
 	protected String lastName;
 	

@@ -1,5 +1,5 @@
 package pitchfork_practitioners;
 
-public class nurse extends user{
+public class Nurse extends User{
 
 }
