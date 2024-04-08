@@ -27,6 +27,7 @@ public class Patient {
 		Database.saveValue(writer, "Phone Number", phoneNumber);
 		Database.saveValue(writer, "Email Address", emailAddress);
 		Database.saveValue(writer, "Home Address", homeAddress);
+		writer.close();
 	}
     
     // Patient loader method
@@ -37,6 +38,7 @@ public class Patient {
 		String phoneNumber = Database.extractValue(scanner, "Phone Number");
 		String emailAddress = Database.extractValue(scanner, "Email Address");
 		String homeAddress = Database.extractValue(scanner, "Home Address");
+		scanner.close();
 		
 		
 		return new Patient(patientID, phoneNumber, emailAddress, homeAddress);

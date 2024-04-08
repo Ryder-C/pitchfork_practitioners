@@ -7,43 +7,36 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class User {
-	protected String firstName;
-	protected String lastName;
-	
-	private String id;
+	private String username;
     private String password;
     
-	public User(String firstName, String lastName, String id, String password) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.id = id;
+	public User(String id, String password) {
+		this.username = id;
 		this.password = password;
 	}
     
     public void saveLogin(File loginRecord) throws IOException {
     	FileWriter writer = new FileWriter(loginRecord);
-    	Database.saveValue(writer, "First Name", firstName);
-    	Database.saveValue(writer, "Last Name", lastName);
-    	Database.saveValue(writer, "ID", id);
+    	Database.saveValue(writer, "ID", username);
     	Database.saveValue(writer, "Password", password);
+    	writer.close();
 	}
     
 	public static User loadLogin(File loginRecord) throws FileNotFoundException {
 		Scanner scanner = new Scanner(loginRecord);
-    	String firstName = Database.extractValue(scanner, "First Name");
-    	String lastName = Database.extractValue(scanner, "Last Name");
-    	String id = Database.extractValue(scanner, "ID");
+    	String username = Database.extractValue(scanner, "ID");
     	String password = Database.extractValue(scanner, "Password");
+    	scanner.close();
     	
-    	return new User(firstName, lastName, id, password);
+    	return new User(username, password);
 	}
 	
-	public String getName() {
-		return firstName + " " + lastName;
-	}
+//	public String getName() {
+//		return firstName + " " + lastName;
+//	}
 	
 	public String getID() {
-		return id;
+		return username;
 	}
 	
 	public String getPassword() {

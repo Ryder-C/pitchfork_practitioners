@@ -29,6 +29,9 @@ public class Database {
 	public void saveRecord(Patient patient) throws IOException {
 		String patientID = ""; // Placeholder until patient.getPatientID is implemented
 		File patientRecord = new File(String.format("%s/%s_patient.txt", directory, patientID));
+		patientRecord.getParentFile().mkdirs();
+		patientRecord.delete();
+		patientRecord.createNewFile();
 		
 		patient.saveToFile(patientRecord);
 	}
@@ -39,6 +42,7 @@ public class Database {
 		File loginRecord = new File(String.format("%s/%s_login.txt", directory, user.getID()));
 		loginRecord.getParentFile().mkdirs();
 		loginRecord.delete();
+		loginRecord.createNewFile();
 		
 		user.saveLogin(loginRecord);
 		

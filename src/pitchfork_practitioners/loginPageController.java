@@ -3,6 +3,7 @@ package pitchfork_practitioners;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class LoginPageController {
@@ -35,24 +37,36 @@ public class LoginPageController {
         String username = usernameField.getText().toLowerCase();
         try {
             if ("doctor".equals(username)) {
-                navigateTo("doctorView.fxml", event);
+                navigateTo("DoctorView.fxml", event);
             } else if ("nurse".equals(username)) {
-                navigateTo("nurseView.fxml", event);
-            } else if ("patient".equals(username)) {
-                navigateTo("patientView.fxml", event);
-            } else {
-                // wrong username
-                System.out.println("User role is not recognized.");
+                navigateTo("NurseView.fxml", event);
+            } else { // normal user login
+            	Database db = Database.getInstance();
+				User user = db.login(usernameField.getText(), passwordField.getText());
+				
+				// TODO: Implement user view
+//				navigateTo("UserView.fxml", event);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            // TODO: Handle the exception properly
-        }
+            Utils.showMessageDialog("Login Failed.", AlertType.ERROR);
+		}
     }
 
     @FXML
     private void handleCreateAccountButtonAction(ActionEvent event) {
-        //Code for account creation
+        Database db = Database.getInstance();
+        String username = usernameField.getText().toLowerCase();
+        String password = passwordField.getText();
+        
+        User newUser = new User(username, password);
+        try {
+			db.createLogin(newUser);
+			Utils.showMessageDialog("Account created successfully.", AlertType.INFORMATION);
+		} catch (IOException e) {
+			Utils.showMessageDialog("Failed to create account.", AlertType.ERROR);
+			e.printStackTrace();
+		}
     }
 
     private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
