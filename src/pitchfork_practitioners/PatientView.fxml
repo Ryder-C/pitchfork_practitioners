@@ -8,11 +8,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: maroon;" type="Pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.PatientViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: maroon;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.PatientViewController">
    <children>
-      <TextField layoutX="212.0" layoutY="338.0" prefHeight="86.0" prefWidth="282.0" />
-      <Button layoutX="765.0" layoutY="119.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="206.0" text="Save" />
-      <Button layoutX="766.0" layoutY="76.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="206.0" text="Edit" />
+      <TextField fx:id="vaccineField" layoutX="212.0" layoutY="338.0" prefHeight="86.0" prefWidth="282.0" />
+      <Button fx:id="saveButton" layoutX="772.0" layoutY="190.0" mnemonicParsing="false" onAction="#saveButton" prefHeight="28.0" prefWidth="206.0" text="Save" />
+      <Button fx:id="editButton" layoutX="773.0" layoutY="147.0" mnemonicParsing="false" onAction="#editButton" prefHeight="28.0" prefWidth="206.0" text="Edit" />
       <Label layoutX="209.0" layoutY="283.0" text="Medical Information" textFill="#ffcf00">
          <font>
             <Font size="24.0" />
@@ -38,8 +38,8 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="211.0" layoutY="460.0" prefHeight="86.0" prefWidth="282.0" />
-      <TextField layoutX="210.0" layoutY="579.0" prefHeight="86.0" prefWidth="282.0" />
+      <TextField fx:id="healthCondField" layoutX="211.0" layoutY="460.0" prefHeight="86.0" prefWidth="282.0" />
+      <TextField fx:id="medicationsField" layoutX="210.0" layoutY="579.0" prefHeight="86.0" prefWidth="282.0" />
       <Label layoutX="596.0" layoutY="284.0" text="Personal Information" textFill="#ffcf00">
          <font>
             <Font size="24.0" />
@@ -50,36 +50,43 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="594.0" layoutY="341.0" prefHeight="26.0" prefWidth="212.0" />
+      <TextField fx:id="phoneNumField" layoutX="594.0" layoutY="341.0" prefHeight="26.0" prefWidth="212.0" />
       <Label layoutX="596.0" layoutY="395.0" text="Email:" textFill="#ffcf00">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="594.0" layoutY="415.0" prefHeight="26.0" prefWidth="212.0" />
+      <TextField fx:id="emailField" layoutX="594.0" layoutY="415.0" prefHeight="26.0" prefWidth="212.0" />
       <Label layoutX="596.0" layoutY="475.0" text="Home Address" textFill="#ffcf00">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="594.0" layoutY="495.0" prefHeight="26.0" prefWidth="212.0" />
+      <TextField fx:id="addressField" layoutX="594.0" layoutY="495.0" prefHeight="26.0" prefWidth="212.0" />
       <Label layoutX="595.0" layoutY="545.0" text="Preferred Pharmacy:" textFill="#ffcf00">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="593.0" layoutY="565.0" prefHeight="26.0" prefWidth="212.0" />
+      <TextField fx:id="prefPharmacyField" layoutX="593.0" layoutY="565.0" prefHeight="26.0" prefWidth="212.0" />
       <Label layoutX="595.0" layoutY="618.0" text="Insurance Information" textFill="#ffcf00">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="593.0" layoutY="638.0" prefHeight="26.0" prefWidth="212.0" />
-      <Label layoutX="755.0" layoutY="37.0" text="Incorrect of Outdated?" textFill="#ffcf00">
+      <TextField fx:id="insuranceInfoField" layoutX="593.0" layoutY="638.0" prefHeight="26.0" prefWidth="212.0" />
+      <Label layoutX="762.0" layoutY="108.0" text="Incorrect of Outdated?" textFill="#ffcf00">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <Circle fill="WHITE" layoutX="499.0" layoutY="106.0" radius="98.0" stroke="BLACK" strokeType="INSIDE" />
+      <TextField fx:id="patientIdField" layoutX="769.0" layoutY="57.0" prefHeight="26.0" prefWidth="147.0" />
+      <Label layoutX="769.0" layoutY="27.0" text="Enter Patient ID" textFill="#ffcf00">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="924.0" layoutY="57.0" mnemonicParsing="false" text="Find" />
    </children>
-</fx:root>
+</Pane>
