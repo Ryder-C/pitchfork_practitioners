@@ -17,12 +17,7 @@ public class Patient {
     private String prevConditions; 
     private String prevMeds;  
     
-	public Patient(String patientID, String phoneNumber, String emailAddress, String homeAddress) {
-		this.patientID = patientID;
-		this.phoneNumber = phoneNumber;
-		this.emailAddress = emailAddress;
-		this.homeAddress = homeAddress;
-	}
+	
 	
 	
     //default constructor
@@ -30,6 +25,20 @@ public class Patient {
 		
 	}
 
+    
+
+	public Patient(String patientID, String phoneNumber, String emailAddress, String homeAddress,
+			String prefferedPharmacy, String insuranceInfo, String vaccines, String prevConditions, String prevMeds) {
+		this.patientID = patientID;
+		this.phoneNumber = phoneNumber;
+		this.emailAddress = emailAddress;
+		this.homeAddress = homeAddress;
+		this.prefferedPharmacy = prefferedPharmacy;
+		this.insuranceInfo = insuranceInfo;
+		this.vaccines = vaccines;
+		this.prevConditions = prevConditions;
+		this.prevMeds = prevMeds;
+	}
 
 
 	// Patient save method
@@ -57,10 +66,16 @@ public class Patient {
 		String phoneNumber = Database.extractValue(scanner, "Phone Number");
 		String emailAddress = Database.extractValue(scanner, "Email Address");
 		String homeAddress = Database.extractValue(scanner, "Home Address");
+		String pharmacy = Database.extractValue(scanner, "Preferred Pharmacy");
+		String insurance = Database.extractValue(scanner, "Insurance Information");
+		String vaccines = Database.extractValue(scanner, "Vaccines");
+		String prevConditions = Database.extractValue(scanner, "Previous Conditions");
+		String prevMeds = Database.extractValue(scanner, "Previous Medications");
+		
 		scanner.close();
 		
 		
-		return new Patient(patientID, phoneNumber, emailAddress, homeAddress);
+		return new Patient(patientID, phoneNumber, emailAddress, homeAddress,pharmacy,insurance,vaccines,prevConditions,prevMeds);
 	}
 
 	public String getPatientID() {
