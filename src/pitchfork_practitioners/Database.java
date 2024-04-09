@@ -15,8 +15,6 @@ public class Database {
 		directory = "database";
 	}
 	
-	
-	
 	public Patient loadRecord(String patientID) throws FileNotFoundException {
 		File patientRecord = new File(String.format("%s/%s_patient.txt", directory, patientID));
 		if (!patientRecord.isFile()) {
@@ -45,7 +43,6 @@ public class Database {
 		loginRecord.createNewFile();
 		
 		user.saveLogin(loginRecord);
-		
 	}
 	
 	public User login(String id, String password) throws FileNotFoundException {
@@ -54,13 +51,13 @@ public class Database {
 			throw new FileNotFoundException();
 		}
 		
+		// Check for existing login and verify password
 		User user = User.loadLogin(userRecord);
 		if (!user.getPassword().equals(password)) {
 			throw new FileNotFoundException();
 		}
 		
 		return user;
-		
 	}
 	
 	public static void saveValue(FileWriter writer, String key, String value) throws IOException {

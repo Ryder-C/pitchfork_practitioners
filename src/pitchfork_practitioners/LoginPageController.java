@@ -40,12 +40,13 @@ public class LoginPageController {
                 navigateTo("DoctorView.fxml", event);
             } else if ("nurse".equals(username)) {
                 navigateTo("NurseView.fxml", event);
-            } else { // normal user login
+            } else {
+            	// normal user login
             	Database db = Database.getInstance();
 				User user = db.login(usernameField.getText(), passwordField.getText());
+				CurrentUser.setCurrentUser(user);
 				
-				// TODO: Implement user view
-//				navigateTo("UserView.fxml", event);
+				navigateTo("PatientView.fxml", event);
             }
         } catch (IOException e) {
             e.printStackTrace();
