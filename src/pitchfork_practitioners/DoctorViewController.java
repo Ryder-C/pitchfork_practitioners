@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert.AlertType;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,6 +47,7 @@ public class DoctorViewController {
 
     @FXML
     private Button saveButton;
+    
     @FXML
     private TextField prescriptionField;
 
@@ -77,22 +80,15 @@ public class DoctorViewController {
 
     @FXML
     private void sendPrescription(ActionEvent event) {
-    	
-    	 String prescription = prescriptionField.getText();
-    	 String preferredPharmacy = patient.getPrefferedPharmacy();
-    	 
-    	  if (preferredPharmacy != null && !preferredPharmacy.isEmpty()) {
-    	        // You can now send the prescription to the preferred pharmacy
-    	        sendPrescriptionToPharmacy(prescription, preferredPharmacy);
-    	    } else {
-    	        // Handle case where preferred pharmacy is not available
-    	        System.out.println("Patient's preferred pharmacy is not available.");
-    	    }
-    }
-    private void sendPrescriptionToPharmacy(String prescription, String preferredPharmacy) {
-    	// TODO need to actually send to pharmacy?
-        System.out.println("Prescription: " + prescription);
-        System.out.println("Preferred Pharmacy: " + preferredPharmacy);
+        String prescription = prescriptionField.getText();
+        String preferredPharmacy = patient.getPrefferedPharmacy();
+
+        if (preferredPharmacy != null) {
+            Utils.showMessageDialog("Prescription sent to: " + preferredPharmacy, AlertType.INFORMATION);
+
+        } else {
+            System.out.println("Patient's preferred pharmacy is not available.");
+        }
     }
 
     @FXML
