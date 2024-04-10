@@ -16,9 +16,9 @@ public class Patient {
     private String vaccines; 
     private String prevConditions; 
     private String prevMeds;  
-    private String patientName;
-    private String patientBirthday;
     
+	
+	
 	
     //default constructor
     public Patient() {
@@ -28,7 +28,7 @@ public class Patient {
     
 
 	public Patient(String patientID, String phoneNumber, String emailAddress, String homeAddress,
-			String prefferedPharmacy, String insuranceInfo, String vaccines, String prevConditions, String prevMeds, String patientName, String patientBirthday) {
+			String prefferedPharmacy, String insuranceInfo, String vaccines, String prevConditions, String prevMeds) {
 		this.patientID = patientID;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
@@ -38,9 +38,6 @@ public class Patient {
 		this.vaccines = vaccines;
 		this.prevConditions = prevConditions;
 		this.prevMeds = prevMeds;
-		this.patientName = patientName;
-		this.patientBirthday = patientBirthday;
-
 	}
 
 
@@ -57,9 +54,6 @@ public class Patient {
 		Database.saveValue(writer, "Vaccines", vaccines);
 		Database.saveValue(writer, "Previous Conditions", prevConditions);
 		Database.saveValue(writer, "Previous Medications", prevMeds);
-		Database.saveValue(writer, "Name", patientName);
-		Database.saveValue(writer, "Birthday", patientBirthday);
-
 		
 		writer.close();
 	}
@@ -77,33 +71,13 @@ public class Patient {
 		String vaccines = Database.extractValue(scanner, "Vaccines");
 		String prevConditions = Database.extractValue(scanner, "Previous Conditions");
 		String prevMeds = Database.extractValue(scanner, "Previous Medications");
-		String name = Database.extractValue(scanner, "Name");
-		String birthday = Database.extractValue(scanner, "Birthday");
-
-
 		
 		scanner.close();
 		
 		
-		return new Patient(patientID, phoneNumber, emailAddress, homeAddress, pharmacy, insurance, vaccines, prevConditions, prevMeds, name, birthday);
+		return new Patient(patientID, phoneNumber, emailAddress, homeAddress,pharmacy,insurance,vaccines,prevConditions,prevMeds);
 	}
-	
-	public String getPatientName() {
-		return patientName;
-	}
-	
-	public void setPatientName(String patientName) {
-		this.patientName = patientName;
-	}
-	
-	public String getPatientBirthday() {
-		return patientBirthday;
-	}
-	
-	public void setPatientBirthday(String patientBirthday) {
-		this.patientBirthday = patientBirthday;
-	}
-	
+
 	public String getPatientID() {
 		return patientID;
 	}
