@@ -20,6 +20,7 @@ public class Patient {
     private String patientBirthday;
     private double patientWeight;
     private String patientHeightString;
+    private double patientBloodPressure;
     
 	
     //default constructor
@@ -194,6 +195,18 @@ public class Patient {
 
 	public String getPatientHeightString() {
 		return patientHeightString;
+	}
+
+
+
+	public double getPatientBloodPressure() {
+		return patientBloodPressure;
+	}
+
+
+
+	public void setPatientBloodPressure(double patientBloodPressure) {
+		this.patientBloodPressure = patientBloodPressure;
 	}
 
 
