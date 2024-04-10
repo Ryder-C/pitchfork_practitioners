@@ -15,6 +15,34 @@ public class Database {
 		directory = "database";
 	}
 	
+	// Assumed that if you are saving a message you are the sender
+	public void saveMessage(Message message) throws IOException, FileNotFoundException {
+		File messageRecord = new File(
+				String.format("%s/%s_%s_messages.txt", directory, message.getSenderID(), message.getReceiverID()));
+		if (!messageRecord.isFile()) {
+			messageRecord = new File(String.format("%s/%s_%s_messages.txt", directory, message.getReceiverID(), message.getSenderID()));
+			if (!messageRecord.isFile()) {
+				messageRecord.createNewFile();
+			}
+		}
+		
+		message.saveMessage(messageRecord);
+	}
+	
+	// Throws FileNotFound if the file does not exist
+	// Throws IOException if there is an error reading the file
+	public Message[] loadMessages(String viewerID, String otherID) throws IOException, FileNotFoundException {
+		File messageRecord = new File(String.format("%s/%s_%s_messages.txt", directory, viewerID, otherID));
+		if (!messageRecord.isFile()) {
+			messageRecord = new File(String.format("%s/%s_%s_messages.txt", directory, otherID, viewerID));
+			if (!messageRecord.isFile()) {
+				throw new FileNotFoundException();
+			}
+		}
+		
+		return Message.loadAllMessages(messageRecord, viewerID, otherID);
+	}
+	
 	public Patient loadRecord(String patientID) throws FileNotFoundException {
 		File patientRecord = new File(String.format("%s/%s_patient.txt", directory, patientID));
 		if (!patientRecord.isFile()) {
