@@ -21,6 +21,8 @@ public class Patient {
     private double patientWeight;
     private String patientHeightString;
     private double patientBloodPressure;
+    private String patientConcernString;
+    private String patientPrescriptionString;
     
 	
     //default constructor
@@ -213,5 +215,29 @@ public class Patient {
 
 	public void setPatientHeightString(String patientHeightString) {
 		this.patientHeightString = patientHeightString;
+	}
+
+
+
+	public String getPatientConcernString() {
+		return patientConcernString;
+	}
+
+
+
+	public void setPatientConcernString(String patientConcernString) {
+		this.patientConcernString = patientConcernString;
+	}
+
+
+
+	public String getPatientPrescriptionString() {
+		return patientPrescriptionString;
+	}
+
+
+
+	public void setPatientPrescriptionString(String patientPrescriptionString) {
+		this.patientPrescriptionString = patientPrescriptionString;
 	}
 }
