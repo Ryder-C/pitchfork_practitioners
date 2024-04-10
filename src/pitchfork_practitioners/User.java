@@ -47,10 +47,14 @@ public class User {
 	
 	
 	public String getID() {
-		return username;
+		return id;
 	}
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public String getUsername() {
+		return username;
 	}
 }
