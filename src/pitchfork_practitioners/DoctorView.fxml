@@ -5,48 +5,59 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="371.0" prefWidth="613.0" style="-fx-background-color: maroon;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.DoctorViewController">
-   <children>
-      <Button layoutX="21.0" layoutY="2.0" mnemonicParsing="false" text="Past visits" />
-      <Button layoutX="5.0" layoutY="28.0" mnemonicParsing="false" text="Message center" />
-      <Button layoutX="34.0" layoutY="54.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="29.0" layoutY="80.0" mnemonicParsing="false" text="Logout" />
-      <TextField fx:id="vaccineField" layoutX="28.0" layoutY="179.0" />
-      <TextField fx:id="prevHealthIssuesField" layoutX="28.0" layoutY="228.0" />
-      <TextField fx:id="prevMedicationsField" layoutX="27.0" layoutY="271.0" />
-      <TextField fx:id="patientNameField" layoutX="220.0" layoutY="179.0" />
-      <TextField fx:id="patientBirthdayField" layoutX="220.0" layoutY="228.0" />
-      <TextArea fx:id="healthInfoTextArea" layoutX="397.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="33.0" layoutY="321.0" mnemonicParsing="false" text="Enter Health information" />
-      <Button layoutX="226.0" layoutY="321.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" text="Find patient history" />
-      <Button layoutX="397.0" layoutY="319.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="109.0" text="Send prescription" />
-      <Button layoutX="541.0" layoutY="319.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="56.0" text="Save" />
-      <Label layoutX="20.0" layoutY="127.0" text="Health information" textFill="#ffcf00">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="231.0" layoutY="127.0" text="Patient history" textFill="#ffcf00">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="394.0" layoutY="65.0" text="Required prescription" textFill="#ffcf00">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="242.0" layoutY="27.0" text="Doctor view" textFill="#ffcf00">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="220.0" layoutY="163.0" text="Enter patient name:" textFill="#ffcf00" />
-      <Label layoutX="220.0" layoutY="211.0" text="Enter patient birthday:" textFill="#ffcf00" />
-      <Label layoutX="26.0" layoutY="163.0" text="Vaccines:" textFill="#ffcf00" />
-      <Label layoutX="30.0" layoutY="211.0" text="Previous health issues:" textFill="#ffcf00" />
-      <Label layoutX="26.0" layoutY="254.0" text="Previous medications:" textFill="#ffcf00" />
-   </children>
+    <children>
+        <!-- VBox for navigation -->
+        <VBox layoutX="10.0" layoutY="10.0" prefHeight="114.0" prefWidth="124.0" spacing="15.0">
+            <!-- Navigation buttons -->
+            <children>
+                <Button fx:id="pastVisitsButton" mnemonicParsing="false" onAction="#pastVisitsButton" prefHeight="26.0" prefWidth="128.0" text="Past Visits" />
+                <Button fx:id="messageCenterButton" mnemonicParsing="false" onAction="#messageCenterButton" prefHeight="26.0" prefWidth="127.0" text="Message Center" />
+                <Button fx:id="logOut" mnemonicParsing="false" onAction="#logoutButton" prefHeight="26.0" prefWidth="135.0" text="Logout" />
+            </children>
+        </VBox>
+
+        <!-- Other UI elements -->
+        <TextField fx:id="vaccineField" layoutX="28.0" layoutY="179.0" />
+        <TextField fx:id="prevHealthIssuesField" layoutX="28.0" layoutY="228.0" />
+        <TextField fx:id="prevMedicationsField" layoutX="27.0" layoutY="271.0" />
+        <TextField fx:id="patientNameField" layoutX="220.0" layoutY="179.0" />
+        <TextField fx:id="patientBirthdayField" layoutX="220.0" layoutY="228.0" />
+        <TextArea fx:id="healthInfoTextArea" layoutX="397.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0" />
+        
+        <Button fx:id="sendPrescription"  layoutX="397.0" layoutY="319.0" mnemonicParsing="false" onAction="#sendPrescription" prefHeight="28.0" prefWidth="109.0" text="Send Prescription" />
+        <Button fx:id="enterHealthInfo"  layoutX="33.0" layoutY="321.0" mnemonicParsing="false" onAction="#enterHealthInfo"  text="Enter Health Information" />
+        <Button fx:id="findPatientHistory"  layoutX="226.0" layoutY="321.0" mnemonicParsing="false" onAction="#findPatientHistory" prefHeight="26.0" prefWidth="148.0" text="Find patient history" />
+        <Button fx:id="save"  layoutX="541.0" layoutY="319.0" mnemonicParsing="false" onAction="#save" prefHeight="28.0" prefWidth="56.0" text="Save" />
+
+                
+        <Label layoutX="20.0" layoutY="127.0" text="Health Information" textFill="#ffcf00">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Label layoutX="231.0" layoutY="127.0" text="Patient History" textFill="#ffcf00">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Label layoutX="394.0" layoutY="65.0" text="Required Prescription" textFill="#ffcf00">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Label layoutX="242.0" layoutY="27.0" text="Doctor View" textFill="#ffcf00">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Label layoutX="220.0" layoutY="163.0" text="Enter patient name:" textFill="#ffcf00" />
+        <Label layoutX="220.0" layoutY="211.0" text="Enter patient birthday:" textFill="#ffcf00" />
+        <Label layoutX="26.0" layoutY="163.0" text="Vaccines:" textFill="#ffcf00" />
+        <Label layoutX="30.0" layoutY="211.0" text="Previous health issues:" textFill="#ffcf00" />
+        <Label layoutX="26.0" layoutY="254.0" text="Previous medications:" textFill="#ffcf00" />
+    </children>
 </Pane>

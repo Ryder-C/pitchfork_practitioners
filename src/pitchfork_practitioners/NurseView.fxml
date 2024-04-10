@@ -21,7 +21,7 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Label fx:id="nurseViewPt1Label" layoutX="242.0" layoutY="27.0" text="Nurse view pt1" textFill="#ffcf00">
+      <Label fx:id="nurseViewPt1Label" layoutX="242.0" layoutY="27.0" text="Nurse View" textFill="#ffcf00">
          <font>
             <Font size="23.0" />
          </font>
