@@ -77,7 +77,7 @@ public class Patient {
 		String phoneNumber = Database.extractValue(scanner, "Phone Number");
 		String emailAddress = Database.extractValue(scanner, "Email Address");
 		String homeAddress = Database.extractValue(scanner, "Home Address");
-		String pharmacy = Database.extractValue(scanner, "Preferred Pharmacy");
+		String pharmacy = Database.extractValue(scanner, "Preferred Pharmacy:");
 		String insurance = Database.extractValue(scanner, "Insurance Information");
 		String vaccines = Database.extractValue(scanner, "Vaccines");
 		String prevConditions = Database.extractValue(scanner, "Previous Conditions");
@@ -182,7 +182,6 @@ public class Patient {
 	}
 
 
-
 	public double getPatientWeight() {
 		return patientWeight;
 	}
@@ -240,4 +239,11 @@ public class Patient {
 	public void setPatientPrescriptionString(String patientPrescriptionString) {
 		this.patientPrescriptionString = patientPrescriptionString;
 	}
+	
+	public String getHealthInfo() {
+		 return "Vaccines: " + vaccines + "\n" +
+                 "Previous Health Issues: " + prevConditions + "\n" +
+                 "Previous Medications: " + prevMeds;
+	}
+	
 }
