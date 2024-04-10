@@ -34,10 +34,9 @@
         <TextField fx:id="patientIDField" layoutX="220.0" layoutY="277.0" />
         
         
-        <Button fx:id="sendPrescription"  layoutX="397.0" layoutY="319.0" mnemonicParsing="false" onAction="#sendPrescription" prefHeight="28.0" prefWidth="109.0" text="Send Prescription" />
+        <Button fx:id="sendPrescription"  layoutX="425.0" layoutY="319.0" mnemonicParsing="false" onAction="#sendPrescription" prefHeight="28.0" prefWidth="109.0" text="Send Prescription" />
         <Button fx:id="enterHealthInfo"  layoutX="33.0" layoutY="321.0" mnemonicParsing="false" onAction="#enterHealthInfo"  text="Enter Health Information" />
         <Button fx:id="findPatientHistory"  layoutX="220.0" layoutY="321.0" mnemonicParsing="false" onAction="#findPatientHistory" prefHeight="26.0" prefWidth="148.0" text="Find patient history" />
-        <Button fx:id="save"  layoutX="541.0" layoutY="319.0" mnemonicParsing="false" onAction="#save" prefHeight="28.0" prefWidth="56.0" text="Save" />
 
                 
         <Label layoutX="20.0" layoutY="127.0" text="Health Information" textFill="#ffcf00">

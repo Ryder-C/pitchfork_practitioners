@@ -163,14 +163,6 @@ public class DoctorViewController {
     }
     
 
-    @FXML
-    private void save(ActionEvent event) {
-    	
-        System.out.println("Saved");
-
-    	healthInfoTextArea.setEditable(false);
-    }
-
     void enterPatientDetails() {
         patientID = patientIDField.getText();
     }
