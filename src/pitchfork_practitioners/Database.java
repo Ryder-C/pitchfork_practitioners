@@ -25,7 +25,7 @@ public class Database {
 	}
 	
 	public void saveRecord(Patient patient) throws IOException {
-		String patientID = ""; // Placeholder until patient.getPatientID is implemented
+		String patientID = patient.getPatientID(); 
 		File patientRecord = new File(String.format("%s/%s_patient.txt", directory, patientID));
 		patientRecord.getParentFile().mkdirs();
 		patientRecord.delete();
@@ -37,7 +37,7 @@ public class Database {
 	// Crate a login for a new user
 	// Warning: This method will overwrite any existing login if another user with the same ID already exists
 	public void createLogin(User user) throws IOException {
-		File loginRecord = new File(String.format("%s/%s_login.txt", directory, user.getID()));
+		File loginRecord = new File(String.format("%s/%s_login.txt", directory, user.getUsername()));
 		loginRecord.getParentFile().mkdirs();
 		loginRecord.delete();
 		loginRecord.createNewFile();

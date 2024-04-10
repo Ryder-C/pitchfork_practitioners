@@ -1,11 +1,17 @@
 	package pitchfork_practitioners;
 
 	import javafx.fxml.FXML;
-	import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 	import javafx.scene.control.Alert.AlertType;
-	import javafx.scene.control.Button;
-	import javafx.scene.image.ImageView;
-	import java.io.FileNotFoundException;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
 	import java.io.IOException;
 	import javafx.application.Platform;
 	import javafx.event.ActionEvent;
@@ -43,7 +49,14 @@
 	    @FXML
 	    private Button saveButton;
 	    @FXML
-	    private Button findButton;
+	    private Button pastVisitsButton;
+	    @FXML
+	    private Button messageCenterButton;
+	    @FXML
+	    private Button logOut;
+	    @FXML
+	    private Label patientNameLabel;
+	    
 
 	    @FXML
 	    private TextField[] uneditableFields;
@@ -53,24 +66,52 @@
 	        uneditableFields = new TextField[]{vaccineField, healthCondField, medicationsField, phoneNumField, emailField,
 	                addressField, prefPharmacyField, insuranceInfoField};
 	        makeUneditable(uneditableFields);
+	        
+	        findPatient();
+	        
 	     
 	        
 	        
 	    }
 	    
-	    @FXML
-	    private void findButton(ActionEvent event) {
-	        enterId();
-	        try {
+	    private void findPatient() {
+	    	getId();
+	    	try {
 				patient = db.loadRecord(patientIDString);
-				fillText();
-				
 			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    @FXML
+	    private void pastVisitsButton(ActionEvent event) {
+	        try {
+				navigateTo("PatientViewPastVisits.fxml", event);
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	        
 	    }
+	    
+	    @FXML
+	    private void messageCenterButton(ActionEvent event) {
+	        
+	        
+	    }
+	    
+	    @FXML
+	    private void logoutButton(ActionEvent event) {
+	        try {
+				navigateTo("LoginPage.fxml", event);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	    }
+	    
+	    
 
 	    @FXML
 	    private void editButton(ActionEvent event) {
@@ -99,8 +140,8 @@
 	        }
 	    }
 	    
-	    void enterId() {	
-	    		patientIDString = patientIdField.getText();
+	    void getId() {	
+	    		patientIDString = CurrentUser.getCurrentUser().getID();
 				
 		}
 	    
@@ -115,6 +156,16 @@
 			insuranceInfoField.setText(patient.getInsuranceInfo());
 			
 		}
+	    
+	    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
+	        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+	        Scene scene = new Scene(root);
+	        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+	        stage.setScene(scene);
+	        stage.show();
+	    }
+	    
+	   
 	    
 	    	
 	}
