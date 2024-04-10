@@ -18,6 +18,8 @@ public class Patient {
     private String prevMeds;  
     private String patientName;
     private String patientBirthday;
+    private double patientWeight;
+    private String patientHeightString;
     
 	
     //default constructor
@@ -174,5 +176,29 @@ public class Patient {
 
 	public void setPrevMeds(String prevMeds) {
 		this.prevMeds = prevMeds;
+	}
+
+
+
+	public double getPatientWeight() {
+		return patientWeight;
+	}
+
+
+
+	public void setPatientWeight(double patientWeight) {
+		this.patientWeight = patientWeight;
+	}
+
+
+
+	public String getPatientHeightString() {
+		return patientHeightString;
+	}
+
+
+
+	public void setPatientHeightString(String patientHeightString) {
+		this.patientHeightString = patientHeightString;
 	}
 }
