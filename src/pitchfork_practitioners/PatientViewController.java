@@ -1,17 +1,17 @@
 	package pitchfork_practitioners;
 
 	import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
+	import javafx.fxml.FXMLLoader;
+	import javafx.scene.control.TextField;
 	import javafx.scene.control.Alert.AlertType;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+	import javafx.scene.Parent;
+	import javafx.scene.Scene;
+	import javafx.scene.control.Button;
+	import javafx.scene.control.Label;
+	import javafx.scene.image.ImageView;
+	import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
+	import java.io.FileNotFoundException;
 	import java.io.IOException;
 	import javafx.application.Platform;
 	import javafx.event.ActionEvent;
@@ -65,22 +65,27 @@ import java.io.FileNotFoundException;
 	    private void initialize() {
 	        uneditableFields = new TextField[]{vaccineField, healthCondField, medicationsField, phoneNumField, emailField,
 	                addressField, prefPharmacyField, insuranceInfoField};
+	        
 	        makeUneditable(uneditableFields);
 	        
-	        findPatient();
-	        
-	     
-	        
+	        Platform.runLater(() -> {
+	            findThisPatient();
+	            fillText();
+	            fillOutNullFields();
+	        });
 	        
 	    }
 	    
-	    private void findPatient() {
-	    	getId();
+	    private void findThisPatient() {
+	    	
 	    	try {
+	    		getId();
 				patient = db.loadRecord(patientIDString);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Utils.showMessageDialog("No patient information found. Please fill out your medical and personal information "
+						+ "in the patient view using the edit and save buttons.",
+						AlertType.INFORMATION);
 			}
 	    }
 	    @FXML
@@ -122,6 +127,14 @@ import java.io.FileNotFoundException;
 	    @FXML
 	    private void saveButton(ActionEvent event) {
 	        makeUneditable(uneditableFields);
+	        saveInfo();
+	        try {
+				db.saveRecord(patient);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Utils.showMessageDialog("error", AlertType.ERROR);
+			}
 	    }
 
 	    // makes text field uneditable
@@ -157,6 +170,18 @@ import java.io.FileNotFoundException;
 			
 		}
 	    
+	    void saveInfo() {
+	    	patient.setVaccines(vaccineField.getText());
+	    	patient.setPrevConditions(healthCondField.getText());
+	    	patient.setPrevMeds(medicationsField.getText());
+	    	patient.setPhoneNumber(phoneNumField.getText());
+	    	patient.setEmailAddress(emailField.getText());
+	    	patient.setHomeAddress(addressField.getText());
+	    	patient.setPrefferedPharmacy(prefPharmacyField.getText());
+	    	patient.setInsuranceInfo(insuranceInfoField.getText());
+	    	patient.setPatientID(patientIDString);
+	    }
+	    
 	    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
 	        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
 	        Scene scene = new Scene(root);
@@ -165,7 +190,13 @@ import java.io.FileNotFoundException;
 	        stage.show();
 	    }
 	    
-	   
+	    private void fillOutNullFields() {
+	        for (TextField textField : uneditableFields) {
+	            if (textField.getText() == null || textField.getText().trim().isEmpty()) {
+	                textField.setText("");
+	            }
+	        }
+	    }
 	    
 	    	
 	}
