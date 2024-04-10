@@ -1,3 +1,4 @@
+
 package pitchfork_practitioners;
 
 import javafx.fxml.FXML;
@@ -41,17 +42,17 @@ public class LoginPageController {
             } else if ("nurse".equals(username)) {
                 navigateTo("NurseView.fxml", event);
             } else {
-            	// normal user login
-            	Database db = Database.getInstance();
-				User user = db.login(usernameField.getText(), passwordField.getText());
-				CurrentUser.setCurrentUser(user);
-				
-				navigateTo("PatientView.fxml", event);
+                // normal user login
+                Database db = Database.getInstance();
+                User user = db.login(usernameField.getText(), passwordField.getText());
+                CurrentUser.setCurrentUser(user);
+                
+                navigateTo("PatientView.fxml", event);
             }
         } catch (IOException e) {
             e.printStackTrace();
             Utils.showMessageDialog("Login Failed.", AlertType.ERROR);
-		}
+        }
     }
 
     @FXML
@@ -71,10 +72,12 @@ public class LoginPageController {
     }
 
     private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
+
 }

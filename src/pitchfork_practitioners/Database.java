@@ -24,6 +24,22 @@ public class Database {
 		return Patient.loadFromFile(patientRecord);
 	}
 	
+	public Patient loadRecordByNameAndBirthday(String patientName, String patientBirthday) throws FileNotFoundException {
+	    Patient patient = findPatient(patientName, patientBirthday);
+	    
+	    if (patient != null) {
+	        String patientID = patient.getPatientID();
+	        File patientRecord = new File(String.format("%s/%s_patient.txt", directory, patientID));
+	        if (!patientRecord.isFile()) {
+	            throw new FileNotFoundException();
+	        }
+	        
+	        return Patient.loadFromFile(patientRecord);
+	    } else {
+	        throw new FileNotFoundException("Patient not found.");
+	    }
+	}
+	
 	public void saveRecord(Patient patient) throws IOException {
 		String patientID = ""; // Placeholder until patient.getPatientID is implemented
 		File patientRecord = new File(String.format("%s/%s_patient.txt", directory, patientID));
@@ -34,7 +50,7 @@ public class Database {
 		patient.saveToFile(patientRecord);
 	}
 	
-	// Crate a login for a new user
+	// Create a login for a new user
 	// Warning: This method will overwrite any existing login if another user with the same ID already exists
 	public void createLogin(User user) throws IOException {
 		File loginRecord = new File(String.format("%s/%s_login.txt", directory, user.getID()));
@@ -59,6 +75,16 @@ public class Database {
 		
 		return user;
 	}
+	  public Patient findPatient(String name, String birthday) throws FileNotFoundException {
+	        File[] patientRecords = new File(directory).listFiles((dir, fileName) -> name.matches("\\d+_patient\\.txt")); 
+	        for (File patientRecord : patientRecords) {
+	            Patient patient = Patient.loadFromFile(patientRecord);
+	            if (patient.getPatientName().equals(name) && patient.getPatientBirthday().equals(birthday)) {
+	                return patient;
+	            }
+	        }
+	        throw new FileNotFoundException("Patient not found.");
+	    }
 	
 	public static void saveValue(FileWriter writer, String key, String value) throws IOException {
 		writer.write(String.format("%s: %s\n", key, value));
