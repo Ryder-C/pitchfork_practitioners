@@ -73,6 +73,10 @@ public class NurseViewController {
     }
 
     @FXML
+    private void handlePastVisitsButtonAction() {
+    	
+    }
+    @FXML
     private void handlePreExaminationButtonAction(ActionEvent event) {
     	try {
 			navigateTo("NursePreExamination.fxml", event);
