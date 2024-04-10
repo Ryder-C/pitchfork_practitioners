@@ -8,9 +8,11 @@
 	import javafx.scene.control.Button;
 	import javafx.scene.control.Label;
 	import javafx.scene.control.ListView;
-	import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
-	import java.io.FileNotFoundException;
+
+import java.io.FileNotFoundException;
 	import java.io.IOException;
 	import javafx.event.ActionEvent;
 	
@@ -19,10 +21,8 @@
 		
 		Database db = Database.getInstance();
 		Patient patient = new Patient();
-		Patient patient2 = new Patient();
-		Patient patient3 = new Patient();
-		Patient patient4 = new Patient();
-		Patient patient5 = new Patient();
+		
+		
 		
 		private String patientIDString;
 		
@@ -40,8 +40,15 @@
 		
 		@FXML
 	    private Button exitButton;
+		
+		@FXML
+	    private TextArea concernsArea;
+		
+		@FXML
+	    private TextArea pescriptionsArea;
 	    
-	    private String[] options = {"Visit 1", "Visit 2", "Visit 3", "Visit 4", "Visit 5"};
+	    
+	    
 	    
 	    
 	     
@@ -49,13 +56,35 @@
 	    
 	    @FXML
 	    public void initialize() {
-	    	pastVisitsListView.getItems().addAll(options);
+	    	concernsArea.setEditable(false);
+	    	pescriptionsArea.setEditable(false);
+	    	try {
+	    		patientIDString = CurrentUser.getCurrentUser().getID();
+	    		patient = db.loadRecord(patientIDString);
+	    		displayInfo();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	    }
+	    
+	    public void displayInfo() {
+	    	String weightString = String.format("%.2f", patient.getPatientWeight());
+	    	weightLabel.setText(weightString);
+	    	heightLabel.setText(patient.getPatientHeightString());
+	    	String bloodpressString = String.format("%.2f", patient.getPatientBloodPressure());
+	    	bloodPressureLabel.setText(bloodpressString);
+	    	pescriptionsArea.setText(patient.getPatientPrescriptionString());
 	    }
 	    
 	    @FXML
 	    private void pastVisitsExitButton(ActionEvent event) {
 	        try {
-				navigateTo("PatientView.fxml", event);
+	        	if("doctor".equals(CurrentUser.getCurrentUser().getUsername())) {
+	        		navigateTo("DoctorView.fxml", event);
+	        	}else
+					navigateTo("PatientView.fxml", event);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

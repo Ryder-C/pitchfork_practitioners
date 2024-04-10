@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -11,61 +10,54 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: maroon;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.PatientViewPastVisitsController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="577.0" layoutX="77.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" width="856.0" />
-      <Label alignment="CENTER" layoutX="132.0" layoutY="29.0" prefHeight="39.0" prefWidth="109.0" text="Visits" textFill="#ffc627">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d3d7" height="573.0" layoutX="78.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="853.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="555.0" layoutX="82.0" layoutY="91.0" stroke="BLACK" strokeType="INSIDE" width="205.0" />
-      <ListView fx:id="pastVisitsListView" layoutX="84.0" layoutY="93.0" prefHeight="551.0" prefWidth="202.0" />
-      <Label alignment="CENTER" layoutX="530.0" layoutY="29.0" prefHeight="44.0" prefWidth="130.0" text="Resuslts" textFill="#ffc627">
+      <Label alignment="CENTER" layoutX="326.0" layoutY="30.0" prefHeight="44.0" prefWidth="346.0" text="Previous Visit Results" textFill="#ffc627">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="372.0" layoutY="170.0" text="Height:">
+      <Label layoutX="266.0" layoutY="144.0" text="Height:">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="371.0" layoutY="207.0" text="Weight:">
+      <Label layoutX="265.0" layoutY="181.0" text="Weight:">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="370.0" layoutY="244.0" text="Blood Pressure:">
+      <Label layoutX="264.0" layoutY="218.0" text="Blood Pressure:">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="371.0" layoutY="314.0" text="Concerns:">
+      <Label layoutX="265.0" layoutY="288.0" text="Concerns:">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="372.0" layoutY="465.0" text="Prescriptions:">
+      <Label layoutX="266.0" layoutY="439.0" text="Prescriptions:">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="645.0" layoutY="173.0" text="Label">
+      <Label fx:id="heightLabel" layoutX="539.0" layoutY="147.0" text="Label">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="645.0" layoutY="210.0" text="Label">
+      <Label fx:id="weightLabel" layoutX="539.0" layoutY="184.0" text="Label">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="645.0" layoutY="248.0" text="Label">
+      <Label fx:id="bloodPressureLabel" layoutX="539.0" layoutY="222.0" text="Label">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextArea layoutX="374.0" layoutY="352.0" prefHeight="112.0" prefWidth="480.0" />
-      <TextArea layoutX="373.0" layoutY="509.0" prefHeight="112.0" prefWidth="480.0" />
+      <TextArea fx:id="concernsArea" layoutX="268.0" layoutY="326.0" prefHeight="112.0" prefWidth="480.0" />
+      <TextArea fx:id="pescriptionsArea" layoutX="267.0" layoutY="483.0" prefHeight="112.0" prefWidth="480.0" />
       <Button fx:id="exitButton" layoutX="835.0" layoutY="36.0" mnemonicParsing="false" onAction="#pastVisitsExitButton" prefHeight="36.0" prefWidth="88.0" text="Exit" />
    </children>
 </Pane>
