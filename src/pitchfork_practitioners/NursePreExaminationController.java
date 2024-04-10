@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class NursePreExaminationController {
@@ -28,6 +30,10 @@ public class NursePreExaminationController {
 
 	@FXML
 	private Button saveButton;
+	
+	@FXML
+	private Label title;
+	
 	
 	
 	@FXML
@@ -54,7 +60,13 @@ public class NursePreExaminationController {
 		patientInfoTextArea.setEditable(false);
 		patientAllergiesTextArea.setEditable(false);
 		patientConcernsTextArea.setEditable(false);
-	}
+		try {
+			db.saveRecord(patient);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Utils.showMessageDialog("error", AlertType.ERROR);
+		}
+    }
 
 	private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));

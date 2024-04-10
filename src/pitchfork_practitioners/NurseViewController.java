@@ -1,16 +1,21 @@
 package pitchfork_practitioners;
 
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.stage.Stage;
 
 public class NurseViewController {
 
-    @FXML
-    private Button pastVisitsButton;
-
+    
     @FXML
     private Button messageCenterButton;
 
@@ -43,13 +48,6 @@ public class NurseViewController {
         // Initialization code
     }
 
-   
-
-    @FXML
-    private void handlePastVisitsButtonAction() {
-        // Handle the past visits button click
-    }
-
     @FXML
     private void handleMessageCenterButtonAction() {
         // Handle the message center button click
@@ -61,8 +59,12 @@ public class NurseViewController {
     }
 
     @FXML
-    private void handleLogoutButtonAction() {
-        // Handle the logout button click
+    private void handleLogoutButtonAction(ActionEvent event) {
+    	try {
+			navigateTo("LoginPage.fxml", event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
@@ -71,9 +73,22 @@ public class NurseViewController {
     }
 
     @FXML
-    private void handlePreExaminationButtonAction() {
-        // Handle the pre-examination button click
+    private void handlePreExaminationButtonAction(ActionEvent event) {
+    	try {
+			navigateTo("NursePreExamination.fxml", event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
+    
+    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+		Parent root = fxmlLoader.load();
+		Scene scene = new Scene(root);
+		Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+	}
 }
 
     
