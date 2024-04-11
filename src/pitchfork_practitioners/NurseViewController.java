@@ -11,7 +11,10 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.List;
 
 public class NurseViewController {
 
@@ -45,9 +48,31 @@ public class NurseViewController {
 
     @FXML
     public void initialize() {
-        // Initialization code
+        populatePatientsAccordion();
     }
 
+    @FXML
+    private void populatePatientsAccordion() {
+            TitledPane selectRecipientPane = (TitledPane) patientsAccordion.getPanes().get(0);
+        
+            VBox patientsList = new VBox();
+
+            Database database = Database.getInstance();
+            List<String> patientIDs = database.getAllPatientIDs();
+
+            for (String patientId : patientIDs) {
+                Button patientButton = new Button(patientId);
+                patientButton.setOnAction(event -> handlePatientSelection(patientId));
+                patientsList.getChildren().add(patientButton);
+            }
+            selectRecipientPane.setContent(patientsList);
+        }
+
+    @FXML
+    private void handlePatientSelection(String patientId) {
+        // Add your implementation here
+    }
+    
     @FXML
     private void handleMessageCenterButtonAction(ActionEvent event) {
         try {

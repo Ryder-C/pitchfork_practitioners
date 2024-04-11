@@ -141,7 +141,7 @@ public class MessageCenterController {
         	}
         
 
-        Message message = new Message(messageText, senderID, receiverID, currentUserID);
+        Message message = new Message(messageText, senderID, receiverID);
         
         try {
             Database.getInstance().saveMessage(message); 

@@ -10,26 +10,22 @@ public class Message {
     private String text;
     private String senderID;
     private String receiverID;
-    private String currentUserID; 
 
-    public Message(String text, String senderID, String receiverID, String currentUserID) {
+    public Message(String text, String senderID, String receiverID) {
         this.text = text;
         this.senderID = senderID;
         this.receiverID = receiverID;
-        this.currentUserID = currentUserID; 
     }
 
     public void saveMessage(File messageRecord) throws IOException {
         FileWriter writer = new FileWriter(messageRecord, true);
-        if ("Doctor".equals(senderID) || "Nurse".equals(senderID)) {
+        
             Database.saveValue(writer, senderID, text);
-        } else {
-            Database.saveValue(writer, currentUserID, text);
-        }
+               
         writer.close();
     }
 
-    public static Message[] loadAllMessages(File messageRecord, String viewerID, String otherID, String currentUserID) throws IOException {
+    public static Message[] loadAllMessages(File messageRecord, String viewerID, String otherID) throws IOException {
         if (!messageRecord.isFile()) {
             throw new IOException("Message record file not found.");
         }
@@ -46,9 +42,9 @@ public class Message {
             String data = temp[1].strip();
 
             if (id.equals(viewerID)) {
-                messages.add(new Message(data, viewerID, otherID, currentUserID));
+                messages.add(new Message(data, viewerID, otherID));
             } else {
-                messages.add(new Message(data, otherID, viewerID, currentUserID));
+                messages.add(new Message(data, otherID, viewerID));
             }
         }
         scanner.close();
