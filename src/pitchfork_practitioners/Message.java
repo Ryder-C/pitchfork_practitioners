@@ -18,7 +18,7 @@ public class Message {
 	}
 	
 	public void saveMessage(File messageRecord) throws IOException {
-		FileWriter writer = new FileWriter(messageRecord);
+		FileWriter writer = new FileWriter(messageRecord, true);
 		Database.saveValue(writer, sender_id, text);
 		writer.close();
 	}
