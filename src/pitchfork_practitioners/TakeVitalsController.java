@@ -3,6 +3,7 @@ package pitchfork_practitioners;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -27,13 +28,15 @@ public class TakeVitalsController {
     private Button saveButton;
 
     @FXML
-    private TextField heightTextField;
+    private TextArea heightTextField;
 
     @FXML
-    private TextField weightTextField;
+    private TextArea weightTextField;
 
     @FXML
-    private TextField bloodPressureTextField;
+    private TextArea bloodPressureTextField;
+    
+    private String currentPatientID;
 
     @FXML
     private void initialize() {
@@ -84,15 +87,6 @@ public class TakeVitalsController {
             Utils.showMessageDialog("Invalid input. Please enter correct vitals.", AlertType.ERROR);
         }
     }
-    
-    @FXML
-    private void logoutButton(ActionEvent event) {
-        try {
-			navigateTo("LoginPage.fxml", event);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    }
    
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
@@ -109,7 +103,7 @@ public class TakeVitalsController {
     private void handleLogoutButtonAction(ActionEvent event) {
         // Logic to handle logout.
         try {
-			navigateTo("LoginView.fxml", event);
+			navigateTo("LoginPage.fxml", event);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
