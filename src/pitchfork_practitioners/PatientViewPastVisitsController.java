@@ -70,16 +70,18 @@
 				e.printStackTrace();
 			}
 	    	
+	    	
 	    }
 	    
 	    //gathers info and displays them in labels
 	    public void displayInfo() {
-	    	String weightString = String.format("%.2f", patient.getPatientWeight());
+	    	String weightString = patient.getPatientWeight();
 	    	weightLabel.setText(weightString);
 	    	heightLabel.setText(patient.getPatientHeight());
-	    	String bloodpressString = String.format("%.2f", patient.getPatientBloodPressure());
+	    	String bloodpressString = patient.getPatientBloodPressure();
 	    	bloodPressureLabel.setText(bloodpressString);
 	    	pescriptionsArea.setText(patient.getPatientPrescriptionString());
+	    	concernsArea.setText(patient.getPatientConcernString());
 	    }
 	    
 	    //sends user back to the patient view
@@ -108,9 +110,11 @@
 	    
 	    //checks if info is not yet available
 	    public void isBlank() {
-	    	if(weightLabel.getText().equals("0.00")) {
+	    	if(weightLabel.getText().equals("")) {
 	    		Utils.showMessageDialog("Examination Results Not Available Yet.", AlertType.WARNING);
 	    		heightLabel.setText("0' 0\"");
+	    		weightLabel.setText("0");
+	    		bloodPressureLabel.setText("0");
 	    	}
 	    }
 	        
