@@ -1,5 +1,6 @@
 package pitchfork_practitioners;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -38,19 +39,24 @@ public class MessageCenterController {
     private Button logoutButton;
 
     private String previousFXML;
+    
+    String staffReceiverID;
+    String patientReceiverID;
+    private String currentUserID;
 
-    public void setPreviousFXML(String previousFXML) {
+
+    public void setPreviousFXML(String previousFXML, String currentUserID) {
         this.previousFXML = previousFXML;
+        this.currentUserID = currentUserID;
         
         if("DoctorView.fxml".equals(this.previousFXML)) {
             populateAccordionDoctorNurse();
-        	}else {
-                System.out.println(previousFXML);
-
         	}
             
-            if ("PatientView.fxml".equals(previousFXML)) {
+        else if ("PatientView.fxml".equals(previousFXML)) {
             populateAccordionPatient();
+        	} else {
+                populateAccordionDoctorNurse();
         	}
     }
 
@@ -60,11 +66,11 @@ public class MessageCenterController {
     }
 
     private void populateAccordionPatient() {
-    	patientsAccordion.getPanes().clear(); // Clear existing content
+    	patientsAccordion.getPanes().clear(); 
         
-        TitledPane doctorPane = new TitledPane("Doctor", createButton("Select Doctor"));
+        TitledPane doctorPane = new TitledPane("Doctor", createButton("Doctor"));
         
-        TitledPane nursePane = new TitledPane("Nurse", createButton("Select Nurse"));
+        TitledPane nursePane = new TitledPane("Nurse", createButton("Nurse"));
         
         patientsAccordion.getPanes().addAll(doctorPane, nursePane);
 		
@@ -76,10 +82,7 @@ public class MessageCenterController {
         return button;
     }
 
-    private void handleSelection(String selection) {
-        System.out.println("Selected: " + selection);
-        // Add logic to handle the selection
-    }
+ 
 
 	private void populateAccordionDoctorNurse() {
         TitledPane selectRecipientPane = (TitledPane) patientsAccordion.getPanes().get(0);
@@ -98,14 +101,44 @@ public class MessageCenterController {
 
         selectRecipientPane.setContent(patientsList);
     }
-
+	
+	private void handleSelection(String selectedID) {
+	        staffReceiverID = selectedID;
+    }
+	
     private void handlePatientSelection(String patientId) {
-        System.out.println(patientId);
+            patientReceiverID = patientId;
     }
 
     @FXML
     private void handleSendMessageButtonAction() {
-        System.out.println("Send message");
+    	String senderID = null;
+    	String receiverID = null;
+    	
+        String messageText = chatTextArea.getText();
+        
+        if("DoctorView.fxml".equals(this.previousFXML)) {
+             senderID = "Staff"; 
+        	 receiverID = patientReceiverID;
+        	} else if ("PatientView.fxml".equals(this.previousFXML)) {
+        	 senderID = currentUserID; 
+             receiverID = staffReceiverID;
+        	}
+        
+        System.out.println(messageText);
+        System.out.println(senderID);
+        System.out.println(receiverID);
+
+        Message message = new Message(messageText, senderID, receiverID);
+        
+        try {
+            Database.getInstance().saveMessage(message); // Call saveMessage method from Database
+            System.out.println("Message saved");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to save message");
+        }
+
     }
 
 
