@@ -10,9 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
 
-
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 
@@ -21,14 +23,11 @@ public class DoctorViewController {
     Database db = Database.getInstance();
     Patient patient = new Patient();
 
-    private String patientName;
-    private String patientBirthday;
+    private String patientID;
 
+    
     @FXML
-    private TextField patientNameField;
-
-    @FXML
-    private TextField patientBirthdayField;
+    private TextField patientIDField;
 
     @FXML
     private TextArea healthInfoTextArea;
@@ -50,45 +49,83 @@ public class DoctorViewController {
     
     @FXML
     private TextField prescriptionField;
+    
+    @FXML
+    private TextArea patientHistoryTextArea;
+    
+    @FXML
+    private TextField vaccineField;
+    
+    @FXML
+    private TextField prevHealthIssuesField;
+    
+    @FXML
+    private TextField prevMedicationsField;
+    
+    @FXML
+    private TextField enterVaccineField;
+
 
 
     @FXML
     private void initialize() {
-        // Initialization code if needed
     }
 
     @FXML
-    private void findPatientHistory(ActionEvent event) {
-        System.out.println("patient history");
+    private void findPatientHistory(ActionEvent event) throws IOException {
 
         enterPatientDetails();
         try {
-            patient = db.loadRecordByNameAndBirthday(patientName, patientBirthday);
+            patient = db.loadRecord(patientID);
             fillPatientHistory();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            // Handle file not found exception
+        	
+            Utils.showMessageDialog("Patient Not Found", AlertType.INFORMATION);
+        }
+    }
+
+
+    @FXML
+    private void sendPrescription(ActionEvent event) {
+        String prescription = enterVaccineField.getText();
+        String preferredPharmacy = patient.getPrefferedPharmacy();
+        patient.setPatientPrescriptionString(prescription);
+
+        if (preferredPharmacy != null) {
+            String trimmedPharmacy = preferredPharmacy.replace("Preferred Pharmacy:", "").trim();
+            Utils.showMessageDialog(prescription + " prescription sent to: " + trimmedPharmacy, AlertType.INFORMATION);
+        } else {
+            System.out.println("Patient's preferred pharmacy is not available. Please Enter Patient ID");
         }
     }
 
     @FXML
     private void enterHealthInfo(ActionEvent event) {
-        System.out.println("health info");
+        String vaccines = " " + vaccineField.getText();
+        String prevHealthIssues = " " + prevHealthIssuesField.getText();
+        String prevMedications = " " + prevMedicationsField.getText();
+        
+        String Vaccines = "Vaccines";
+        String PreviousConditions = "Previous Conditions";
+        String PreviousMedications = "Previous Medications";
 
-        healthInfoTextArea.setEditable(true);
-    }
-
-    @FXML
-    private void sendPrescription(ActionEvent event) {
-        String prescription = prescriptionField.getText();
-        String preferredPharmacy = patient.getPrefferedPharmacy();
-
-        if (preferredPharmacy != null) {
-            Utils.showMessageDialog("Prescription sent to: " + preferredPharmacy, AlertType.INFORMATION);
-
-        } else {
-            System.out.println("Patient's preferred pharmacy is not available.");
+        try {
+            if (!vaccines.isEmpty()) {
+                db.appendHealthInfoToFile(patientID, Vaccines, vaccines);
+            }
+            if (!prevHealthIssues.isEmpty()) {
+                db.appendHealthInfoToFile(patientID, PreviousConditions,  prevHealthIssues);
+            }
+            if (!prevMedications.isEmpty()) {
+                db.appendHealthInfoToFile(patientID, PreviousMedications,  prevMedications);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        vaccineField.clear();
+        prevHealthIssuesField.clear();
+        prevMedicationsField.clear();
     }
 
     @FXML
@@ -96,7 +133,6 @@ public class DoctorViewController {
         try {
 			navigateTo("PatientViewPastVisits.fxml", event);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -104,9 +140,18 @@ public class DoctorViewController {
     
     @FXML
     private void messageCenterButton(ActionEvent event) {
-        
-        System.out.println("Message Center");
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageCenterView.fxml"));
+            Parent root = loader.load();
+            MessageCenterController controller = loader.getController();
+            controller.setPreviousFXML("DoctorView.fxml"); 
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
@@ -116,27 +161,15 @@ public class DoctorViewController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
     }
     
 
-    @FXML
-    private void save(ActionEvent event) {
-    	
-        System.out.println("Saved");
-
-    	healthInfoTextArea.setEditable(false);
-    }
-
     void enterPatientDetails() {
-
-        patientName = patientNameField.getText();
-        patientBirthday = patientBirthdayField.getText();
+        patientID = patientIDField.getText();
     }
 
     void fillPatientHistory() {
-        // Populate patient's history into the healthInfoTextArea
-        healthInfoTextArea.setText("Previously Prescribed Medication: " + patient.getPrevMeds() + "\n"
+    	patientHistoryTextArea.setText("Previously Prescribed Medication: " + patient.getPrevMeds() + "\n"
                 + "History of Immunization: " + patient.getVaccines() + "\n"
                 + "Previous Health Issues: " + patient.getPrevConditions());
     }
