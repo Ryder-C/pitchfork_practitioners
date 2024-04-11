@@ -19,6 +19,8 @@
 
 	public class PatientViewController {
 		
+		//declarations
+		
 		Database db = Database.getInstance();
 		Patient patient = new Patient();
 		
@@ -60,8 +62,6 @@
 
 	    @FXML
 	    private TextField[] uneditableFields;
-	    
-	    private String currentUserID;
 
 	    @FXML
 	    private void initialize() {
@@ -69,9 +69,16 @@
 	                addressField, prefPharmacyField, insuranceInfoField};
 	        
 	        makeUneditable(uneditableFields);
+	        if(patient.getPatientName() == null || patient.getPatientName().equals("")) {
+	        	patientNameLabel.setText(CurrentUser.getCurrentUser().getUsername());
+	        }
+	        else {
+	        	patientNameLabel.setText(patient.getPatientName());
+	        }
 	        
+	        
+	        //runs after scene has switched
 	        Platform.runLater(() -> {
-	            currentUserID = CurrentUser.getCurrentUser().getID(); // Set the current user's ID
 	            findThisPatient();
 	            fillText();
 	            fillOutNullFields();
@@ -79,6 +86,7 @@
 	        
 	    }
 	    
+	    //uses the id from the user to find patient information
 	    private void findThisPatient() {
 	    	
 	    	try {
@@ -91,6 +99,8 @@
 						AlertType.INFORMATION);
 			}
 	    }
+	    
+	    //navigates to past visits page
 	    @FXML
 	    private void pastVisitsButton(ActionEvent event) {
 	        try {
@@ -104,20 +114,11 @@
 	    
 	    @FXML
 	    private void messageCenterButton(ActionEvent event) {
-	        try {
-	            FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageCenterView.fxml"));
-	            Parent root = loader.load();
-	            MessageCenterController controller = loader.getController();
-	            controller.setPreviousFXML("PatientView.fxml", currentUserID); 
-	            Scene scene = new Scene(root);
-	            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-	            stage.setScene(scene);
-	            stage.show();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+	        
 	    }
 	    
+	    
+	    //logs user and sends them to login page
 	    @FXML
 	    private void logoutButton(ActionEvent event) {
 	        try {
@@ -130,13 +131,14 @@
 	    }
 	    
 	    
-
+	    //allows information to become editable to the user
 	    @FXML
 	    private void editButton(ActionEvent event) {
 	        makeEditable(uneditableFields);
 	        
 	    }
 
+	    //saves information to the patient 
 	    @FXML
 	    private void saveButton(ActionEvent event) {
 	        makeUneditable(uneditableFields);
@@ -166,11 +168,13 @@
 	        }
 	    }
 	    
+	    //retrieves id from the current user
 	    void getId() {	
 	    		patientIDString = CurrentUser.getCurrentUser().getID();
 				
 		}
 	    
+	    //fills in all textfields with patient's information
 	    void fillText() {
 			vaccineField.setText(patient.getVaccines());
 			healthCondField.setText(patient.getPrevConditions());
@@ -183,6 +187,7 @@
 			
 		}
 	    
+	    //saves all information entered to patient obj
 	    void saveInfo() {
 	    	patient.setVaccines(vaccineField.getText());
 	    	patient.setPrevConditions(healthCondField.getText());
@@ -195,6 +200,7 @@
 	    	patient.setPatientID(patientIDString);
 	    }
 	    
+	    //navigates to different scenes 
 	    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
 	        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
 	        Scene scene = new Scene(root);
@@ -203,6 +209,7 @@
 	        stage.show();
 	    }
 	    
+	    //changes null to blank
 	    private void fillOutNullFields() {
 	        for (TextField textField : uneditableFields) {
 	            if (textField.getText() == null || textField.getText().trim().isEmpty()) {
