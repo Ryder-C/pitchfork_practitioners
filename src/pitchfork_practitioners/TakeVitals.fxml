@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: maroon;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pitchfork_practitioners.TakeVitalsController">
    <children>
-      <Button layoutX="274.0" layoutY="354.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="saveButton" layoutX="274.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleSaveVitalsButtonAction" text="Save" />
       <Label layoutX="69.0" layoutY="224.0" text="Enter weight" textFill="#ff9500">
          <font>
             <Font size="21.0" />
@@ -38,9 +38,8 @@
             <Image url="@finished_logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="pastVisitsButton" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" onAction="#pastVisitsButton" prefHeight="26.0" prefWidth="128.0" text="Past Visits" />
-      <Button fx:id="pastVisitsButton1" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#pastVisitsButton" prefHeight="26.0" prefWidth="128.0" text="Message center" />
-      <Button fx:id="pastVisitsButton2" layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#pastVisitsButton" prefHeight="26.0" prefWidth="128.0" text="Back" />
-      <Button fx:id="pastVisitsButton21" layoutX="14.0" layoutY="144.0" mnemonicParsing="false" onAction="#pastVisitsButton" prefHeight="26.0" prefWidth="128.0" text="Logout" />
+      <Button fx:id="messageCenterButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#messageCenterButton" prefHeight="26.0" prefWidth="128.0" text="Message center" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="26.0" prefWidth="128.0" text="Back" />
+      <Button fx:id="logoutButton" layoutX="14.0" layoutY="82.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" prefHeight="26.0" prefWidth="128.0" text="Logout" />
    </children>
 </Pane>

@@ -57,6 +57,7 @@ public class TakeVitalsController {
         }
     }
     
+    @FXML
     private void handleSaveVitalsButtonAction(ActionEvent event) {
         String height = heightTextField.getText();
         String weight = weightTextField.getText();
