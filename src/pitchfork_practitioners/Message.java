@@ -10,14 +10,13 @@ public class Message {
     private String text;
     private String senderID;
     private String receiverID;
-    private String currentUserID; // Add currentUserID field
+    private String currentUserID; 
 
-    // Constructor with currentUserID parameter
     public Message(String text, String senderID, String receiverID, String currentUserID) {
         this.text = text;
         this.senderID = senderID;
         this.receiverID = receiverID;
-        this.currentUserID = currentUserID; // Assign currentUserID
+        this.currentUserID = currentUserID; 
     }
 
     public void saveMessage(File messageRecord) throws IOException {

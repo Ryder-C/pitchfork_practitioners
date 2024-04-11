@@ -75,8 +75,12 @@ public class NurseViewController {
     }
 
     @FXML
-    private void handleTakeVitalsButtonAction() {
-        // Handle the take vitals button click
+    private void handleTakeVitalsButtonAction(ActionEvent event) {
+    	try {
+			navigateTo("TakeVitals.fxml", event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
