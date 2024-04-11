@@ -79,10 +79,9 @@ public class TakeVitalsController {
         if (validateInput(height, weight, bloodPressure)) {
             try {
             	// Get current user
-            	User user = CurrentUser.getCurrentUser();
             	
                 Database db = Database.getInstance();
-                Patient p = db.loadRecord(user.getID());
+                Patient p = db.loadRecord(Utils.showInputDialog("Enter patient ID"));
                 
                 // Save vitals to patient record
                 p.setVitals(weight, height, bloodPressure);
