@@ -143,7 +143,7 @@ public class DoctorViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageCenterView.fxml"));
             Parent root = loader.load();
             MessageCenterController controller = loader.getController();
-            controller.setPreviousFXML("DoctorView.fxml", "Staff"); 
+            controller.setPreviousFXML("DoctorView.fxml", "Doctor"); 
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

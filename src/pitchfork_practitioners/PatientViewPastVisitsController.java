@@ -47,11 +47,6 @@
 		@FXML
 	    private TextArea pescriptionsArea;
 	    
-	    
-	    
-	    
-	    
-	     
 	        
 	    
 	    @FXML

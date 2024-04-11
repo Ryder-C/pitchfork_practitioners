@@ -114,6 +114,18 @@
 	    
 	    @FXML
 	    private void messageCenterButton(ActionEvent event) {
+	    	 try {
+	             FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageCenterView.fxml"));
+	             Parent root = loader.load();
+	             MessageCenterController controller = loader.getController();
+	             controller.setPreviousFXML("PatientView.fxml", patientIDString); 
+	             Scene scene = new Scene(root);
+	             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+	             stage.setScene(scene);
+	             stage.show();
+	         } catch (IOException e) {
+	             e.printStackTrace();
+	         }
 	        
 	    }
 	    

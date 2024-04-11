@@ -17,6 +17,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.Scanner;
+
 
 public class MessageCenterController {
 
@@ -34,9 +36,15 @@ public class MessageCenterController {
 
     @FXML
     private Accordion patientsAccordion;
+    
+    @FXML
+    private Button loadMessageButton;
 
     @FXML
     private Button logoutButton;
+    
+    @FXML
+    private Button clearTextBox;
 
     private String previousFXML;
     
@@ -123,29 +131,64 @@ public class MessageCenterController {
              senderID = "Doctor"; 
         	 receiverID = patientReceiverID;
         	} else if ("PatientView.fxml".equals(this.previousFXML)) {
-        	 senderID = currentUserID; 
-             receiverID = staffReceiverID;
+        		
+        	 senderID = staffReceiverID; 
+             receiverID = currentUserID;
+             
         	}else if ("NurseView.fxml".equals(this.previousFXML)) {
         	 senderID = "Nurse"; 
              receiverID = patientReceiverID;
         	}
         
-        System.out.println(messageText);
-        System.out.println(senderID);
-        System.out.println(receiverID);
 
-        Message message = new Message(messageText, senderID, receiverID);
+        Message message = new Message(messageText, senderID, receiverID, currentUserID);
         
         try {
-            Database.getInstance().saveMessage(message); // Call saveMessage method from Database
-            System.out.println("Message saved");
+            Database.getInstance().saveMessage(message); 
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Failed to save message");
         }
 
     }
+    
+    @FXML
+    private void handleLoadMessageButtonAction() {
+        try {
+            String filename = patientReceiverID + "_" + currentUserID + "_messages.txt";
+            File file = new File("database", filename);
+            Scanner scanner = new Scanner(file);
 
+            chatTextArea.clear();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                chatTextArea.appendText(line + "\n");
+            }
+
+            scanner.close(); // Close the scanner
+        } catch (FileNotFoundException e) {
+            System.err.println("Failed to load messages");
+        }
+    }
+
+
+    private String getOtherID() {
+        if ("DoctorView.fxml".equals(previousFXML)) {
+            return "Doctor";
+        } else if ("PatientView.fxml".equals(previousFXML)) {
+            return currentUserID;
+        } else if ("NurseView.fxml".equals(previousFXML)) {
+            return "Nurse";
+        }
+        return null;
+    }
+
+    @FXML
+    private void clearTextBox() {
+        chatTextArea.clear();
+
+    }
 
     @FXML
     private void handleBackButtonAction(ActionEvent event) {

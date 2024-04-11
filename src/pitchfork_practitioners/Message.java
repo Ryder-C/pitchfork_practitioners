@@ -7,55 +7,64 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Message {
-	private String text;
-	private String sender_id;
-	private String receiver_id;
-	
-	public Message(String text, String sender_id, String receiver_id) {
-		this.text = text;
-		this.sender_id = sender_id;
-		this.receiver_id = receiver_id;
-	}
-	
-	public void saveMessage(File messageRecord) throws IOException {
-		FileWriter writer = new FileWriter(messageRecord, true);
-		Database.saveValue(writer, sender_id, text);
-		writer.close();
-	}
-	
-	public static Message[] loadAllMessages(File messageRecord, String viewerID, String otherID) throws IOException {
-		if (!messageRecord.isFile()) {
-			throw new IOException();
-		}
-		
-		Scanner scanner = new Scanner(messageRecord);
-		ArrayList<Message> messages = new ArrayList<Message>();
-		while (scanner.hasNextLine()) {
-			String text = scanner.nextLine();
-			String[] temp = text.split(": ");
-			String id = temp[0].strip();
-			String data = temp[1].strip();
-			
-			if (id.equals(viewerID)) {
-				messages.add(new Message(data, viewerID, otherID));
-			} else {
-				messages.add(new Message(data, otherID, viewerID));
-			}
-		}
-		scanner.close();
-		return messages.toArray(new Message[messages.size()]);
-	}
-	
-	public String getSenderID() {
-        return sender_id;
-    }
-	
-	public String getReceiverID() {
-        return receiver_id;
+    private String text;
+    private String senderID;
+    private String receiverID;
+    private String currentUserID; // Add currentUserID field
+
+    // Constructor with currentUserID parameter
+    public Message(String text, String senderID, String receiverID, String currentUserID) {
+        this.text = text;
+        this.senderID = senderID;
+        this.receiverID = receiverID;
+        this.currentUserID = currentUserID; // Assign currentUserID
     }
 
-	public String getText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void saveMessage(File messageRecord) throws IOException {
+        FileWriter writer = new FileWriter(messageRecord, true);
+        if ("Doctor".equals(senderID) || "Nurse".equals(senderID)) {
+            Database.saveValue(writer, senderID, text);
+        } else {
+            Database.saveValue(writer, currentUserID, text);
+        }
+        writer.close();
+    }
+
+    public static Message[] loadAllMessages(File messageRecord, String viewerID, String otherID, String currentUserID) throws IOException {
+        if (!messageRecord.isFile()) {
+            throw new IOException("Message record file not found.");
+        }
+
+        Scanner scanner = new Scanner(messageRecord);
+        ArrayList<Message> messages = new ArrayList<>();
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] temp = line.split(":");
+            if (temp.length < 2) {
+                continue;
+            }
+            String id = temp[0].strip();
+            String data = temp[1].strip();
+
+            if (id.equals(viewerID)) {
+                messages.add(new Message(data, viewerID, otherID, currentUserID));
+            } else {
+                messages.add(new Message(data, otherID, viewerID, currentUserID));
+            }
+        }
+        scanner.close();
+        return messages.toArray(new Message[messages.size()]);
+    }
+
+    public String getSenderID() {
+        return senderID;
+    }
+
+    public String getReceiverID() {
+        return receiverID;
+    }
+
+    public String getText() {
+        return text;
+    }
 }

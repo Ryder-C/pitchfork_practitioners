@@ -34,7 +34,9 @@
         <TextArea fx:id="chatTextArea" layoutX="10.0" layoutY="153.0" prefHeight="100.0" prefWidth="400.0" promptText="Write your message here..." />
 
         <Button fx:id="sendMessageButton" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleSendMessageButtonAction" text="Send Message" />
-
+        <Button fx:id="loadMessageButton" layoutX="150.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleLoadMessageButtonAction" text="Load Messages" />
+        <Button fx:id="clearTextBox" layoutX="290.0" layoutY="260.0" mnemonicParsing="false" onAction="#clearTextBox" text="Clear" />
+        
         
         <Accordion fx:id="patientsAccordion" layoutX="420.0" layoutY="153.0" prefHeight="176.0" prefWidth="150.0">
             <panes>
