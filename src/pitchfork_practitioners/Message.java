@@ -53,4 +53,9 @@ public class Message {
 	public String getReceiverID() {
         return receiver_id;
     }
+
+	public String getText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

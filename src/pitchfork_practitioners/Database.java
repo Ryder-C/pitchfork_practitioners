@@ -49,6 +49,28 @@ public class Database {
 		return Message.loadAllMessages(messageRecord, viewerID, otherID);
 	}
 	
+	 public List<String> getAllPatientIDs() {
+	        List<String> patientIDs = new ArrayList<>();
+	        File folder = new File(directory);
+	        File[] listOfFiles = folder.listFiles();
+
+	        if (listOfFiles != null) {
+	            for (File file : listOfFiles) {
+	                if (file.isFile()) {
+	                    String fileName = file.getName();
+	                    if (fileName.endsWith("_patient.txt")) {
+	                        // Extract patient ID from the file name
+	                        String patientID = fileName.replace("_patient.txt", "");
+	                        patientIDs.add(patientID);
+	                    }
+	                }
+	            }
+	        }
+
+	        return patientIDs;
+	    }
+	 
+	
 	public Patient loadRecord(String patientID) throws FileNotFoundException {
 		File patientRecord = new File(String.format("%s/%s_patient.txt", directory, patientID));
 		if (!patientRecord.isFile()) {

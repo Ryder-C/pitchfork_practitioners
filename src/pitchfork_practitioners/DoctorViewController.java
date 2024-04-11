@@ -69,7 +69,6 @@ public class DoctorViewController {
 
     @FXML
     private void initialize() {
-        // Initialization code if needed
     }
 
     @FXML
@@ -82,7 +81,6 @@ public class DoctorViewController {
         } catch (FileNotFoundException e) {
         	
             Utils.showMessageDialog("Patient Not Found", AlertType.INFORMATION);
-            // Handle file not found exception
         }
     }
 
@@ -103,7 +101,6 @@ public class DoctorViewController {
 
     @FXML
     private void enterHealthInfo(ActionEvent event) {
-        // Retrieve information from the text fields
         String vaccines = " " + vaccineField.getText();
         String prevHealthIssues = " " + prevHealthIssuesField.getText();
         String prevMedications = " " + prevMedicationsField.getText();
@@ -112,7 +109,6 @@ public class DoctorViewController {
         String PreviousConditions = "Previous Conditions";
         String PreviousMedications = "Previous Medications";
 
-        // Write the updated health information back to the patient's record file
         try {
             if (!vaccines.isEmpty()) {
                 db.appendHealthInfoToFile(patientID, Vaccines, vaccines);
@@ -125,10 +121,8 @@ public class DoctorViewController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle file writing exception
         }
 
-        // Clear the text fields after updating
         vaccineField.clear();
         prevHealthIssuesField.clear();
         prevMedicationsField.clear();
@@ -139,7 +133,6 @@ public class DoctorViewController {
         try {
 			navigateTo("PatientViewPastVisits.fxml", event);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -147,9 +140,18 @@ public class DoctorViewController {
     
     @FXML
     private void messageCenterButton(ActionEvent event) {
-        
-        System.out.println("Message Center");
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageCenterView.fxml"));
+            Parent root = loader.load();
+            MessageCenterController controller = loader.getController();
+            controller.setPreviousFXML("DoctorView.fxml"); 
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
@@ -159,7 +161,6 @@ public class DoctorViewController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
     }
     
 
@@ -168,7 +169,6 @@ public class DoctorViewController {
     }
 
     void fillPatientHistory() {
-        // Populate patient's history into the healthInfoTextArea
     	patientHistoryTextArea.setText("Previously Prescribed Medication: " + patient.getPrevMeds() + "\n"
                 + "History of Immunization: " + patient.getVaccines() + "\n"
                 + "Previous Health Issues: " + patient.getPrevConditions());
