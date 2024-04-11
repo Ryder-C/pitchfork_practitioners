@@ -12,8 +12,7 @@
    <children>
       <Button fx:id="pastVisitsButton" layoutX="21.0" layoutY="2.0" mnemonicParsing="false" onAction="#handlePastVisitsButtonAction" text="Past visits" />
       <Button fx:id="messageCenterButton" layoutX="5.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleMessageCenterButtonAction" text="Message center" />
-      <Button fx:id="backButton" layoutX="34.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Back" />
-      <Button fx:id="logoutButton" layoutX="29.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" text="Logout" />
+      <Button fx:id="logoutButton" layoutX="29.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" text="Logout" />
       <Button fx:id="takeVitalsButton" layoutX="443.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleTakeVitalsButtonAction" prefHeight="28.0" prefWidth="141.0" text="Take vitals" />
       <Button fx:id="preExaminationButton" layoutX="443.0" layoutY="203.0" mnemonicParsing="false" onAction="#handlePreExaminationButtonAction" prefHeight="28.0" prefWidth="141.0" text="Pre-Examination" />
       <Label fx:id="patientsLabel" layoutX="265.0" layoutY="143.0" text="Patients " textFill="#ffcf00">

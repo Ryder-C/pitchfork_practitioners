@@ -17,7 +17,6 @@
         <VBox layoutX="10.0" layoutY="10.0" prefHeight="114.0" prefWidth="124.0" spacing="15.0">
             <!-- Navigation buttons -->
             <children>
-                <Button fx:id="pastVisitsButton" mnemonicParsing="false" onAction="#pastVisitsButton" prefHeight="26.0" prefWidth="128.0" text="Past Visits" />
                 <Button fx:id="messageCenterButton" mnemonicParsing="false" onAction="#messageCenterButton" prefHeight="26.0" prefWidth="127.0" text="Message Center" />
                 <Button fx:id="logOut" mnemonicParsing="false" onAction="#logoutButton" prefHeight="26.0" prefWidth="135.0" text="Logout" />
             </children>
