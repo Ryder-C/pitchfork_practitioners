@@ -66,7 +66,6 @@ public class DoctorViewController {
     private TextField enterVaccineField;
 
 
-
     @FXML
     private void initialize() {
     }
