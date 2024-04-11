@@ -1,6 +1,8 @@
 package pitchfork_practitioners;
 
 import java.io.IOException;
+
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
 
 public class NursePreExaminationController {
 	Database db = Database.getInstance();
-	
+	String patID;
 	@FXML
 	private TextArea patientInfoTextArea;
 
@@ -38,6 +40,12 @@ public class NursePreExaminationController {
 	@FXML
 	private void initialize() {
 		// Initialization code if needed
+		
+		
+		//runs after scene has switched
+        Platform.runLater(() -> {
+        	patID = Utils.showInputDialog("Enter patient ID:");
+        });
 	}
 
 
@@ -82,9 +90,7 @@ public class NursePreExaminationController {
 		patientConcernsTextArea.setEditable(false);
 		
 		String concerns = patientConcernsTextArea.getText();
-		
-		String patID = Utils.showInputDialog("Enter patient ID:");
-		
+
 		try {
 			Patient patient = db.loadRecord(patID);
 			patient.setPatientConcernString(concerns);
