@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 
 public class NursePreExaminationController {
 	Database db = Database.getInstance();
-	Patient patient = new Patient();
 	
 	@FXML
 	private TextArea patientInfoTextArea;
@@ -81,13 +80,24 @@ public class NursePreExaminationController {
 		patientInfoTextArea.setEditable(false);
 		patientAllergiesTextArea.setEditable(false);
 		patientConcernsTextArea.setEditable(false);
+		
+		String concerns = patientConcernsTextArea.getText();
+		
+		String patID = Utils.showInputDialog("Enter patient ID:");
+		
 		try {
+			Patient patient = db.loadRecord(patID);
+			patient.setPatientConcernString(concerns);
 			db.saveRecord(patient);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Utils.showMessageDialog("error", AlertType.ERROR);
-		}
-    }
+		} 
+		
+		patientInfoTextArea.clear();
+		patientAllergiesTextArea.clear();
+		patientConcernsTextArea.clear();
+    } 
 
     private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
