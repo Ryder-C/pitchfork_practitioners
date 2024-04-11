@@ -171,7 +171,11 @@ public class Database {
 	
 	public static String extractValue(Scanner scanner, String key) {
 		scanner.findInLine(String.format("%s: ", key));
-		return scanner.nextLine();
+		if (scanner.hasNextLine()) {
+			return scanner.nextLine();
+		} else {
+			return "";
+		}
 	}
 	
 	// Singleton pattern
