@@ -76,7 +76,7 @@
 	    public void displayInfo() {
 	    	String weightString = String.format("%.2f", patient.getPatientWeight());
 	    	weightLabel.setText(weightString);
-	    	heightLabel.setText(patient.getPatientHeightString());
+	    	heightLabel.setText(patient.getPatientHeight());
 	    	String bloodpressString = String.format("%.2f", patient.getPatientBloodPressure());
 	    	bloodPressureLabel.setText(bloodpressString);
 	    	pescriptionsArea.setText(patient.getPatientPrescriptionString());

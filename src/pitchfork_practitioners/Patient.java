@@ -18,11 +18,14 @@ public class Patient {
     private String prevMeds;  
     private String patientName;
     private String patientBirthday;
-    private double patientWeight;
-    private String patientHeightString;
-    private double patientBloodPressure;
     private String patientConcernString;
     private String patientPrescriptionString;
+    
+    // Vitals
+    private String weight;
+    private String height;
+    private String bloodPressure;
+    
     
 	
     //default constructor
@@ -64,6 +67,13 @@ public class Patient {
 		Database.saveValue(writer, "Previous Medications", prevMeds);
 		Database.saveValue(writer, "Name", patientName);
 		Database.saveValue(writer, "Birthday", patientBirthday);
+		Database.saveValue(writer, "Concerns", patientConcernString);
+		Database.saveValue(writer, "Prescriptions", patientPrescriptionString);
+		
+		// Vitals
+		Database.saveValue(writer, "Weight", String.valueOf(weight));
+		Database.saveValue(writer, "Height", String.valueOf(height));
+		Database.saveValue(writer, "Blood Pressure", String.valueOf(bloodPressure));
 
 		
 		writer.close();
@@ -84,13 +94,31 @@ public class Patient {
 		String prevMeds = Database.extractValue(scanner, "Previous Medications");
 		String name = Database.extractValue(scanner, "Name");
 		String birthday = Database.extractValue(scanner, "Birthday");
+		String concerns = Database.extractValue(scanner, "Concerns");
+		String prescriptions = Database.extractValue(scanner, "Prescriptions");
+		
+		// Vitals
+		String weight = Database.extractValue(scanner, "Weight");
+		String height = Database.extractValue(scanner, "Height");
+		String bloodPressure = Database.extractValue(scanner, "Blood Pressure");
 
 
 		
 		scanner.close();
 		
 		
-		return new Patient(patientID, phoneNumber, emailAddress, homeAddress, pharmacy, insurance, vaccines, prevConditions, prevMeds, name, birthday);
+		Patient p = new Patient(patientID, phoneNumber, emailAddress, homeAddress, pharmacy, insurance, vaccines, prevConditions, prevMeds, name, birthday);
+		p.setPatientConcernString(concerns);
+		p.setPatientPrescriptionString(prescriptions);
+		p.setVitals(weight, height, bloodPressure);
+		
+		return p;
+	}
+	
+	public void setVitals(String weight, String height, String bloodPressure) {
+		this.weight = weight;
+		this.height = height;
+		this.bloodPressure = bloodPressure;
 	}
 	
 	public String getPatientName() {
@@ -182,38 +210,38 @@ public class Patient {
 	}
 
 
-	public double getPatientWeight() {
-		return patientWeight;
+	public String getPatientWeight() {
+		return weight;
 	}
 
 
 
-	public void setPatientWeight(double patientWeight) {
-		this.patientWeight = patientWeight;
+	public void setPatientWeight(String weight) {
+		this.weight = weight;
 	}
 
 
 
-	public String getPatientHeightString() {
-		return patientHeightString;
+	public String getPatientHeight() {
+		return height;
 	}
 
 
 
-	public double getPatientBloodPressure() {
-		return patientBloodPressure;
+	public String getPatientBloodPressure() {
+		return bloodPressure;
 	}
 
 
 
-	public void setPatientBloodPressure(double patientBloodPressure) {
-		this.patientBloodPressure = patientBloodPressure;
+	public void setBloodPressure(String bloodPressure) {
+		this.bloodPressure = bloodPressure;
 	}
 
 
 
-	public void setPatientHeightString(String patientHeightString) {
-		this.patientHeightString = patientHeightString;
+	public void setHeight(String height) {
+		this.height = height;
 	}
 
 

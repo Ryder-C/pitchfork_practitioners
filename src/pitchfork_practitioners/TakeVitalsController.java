@@ -66,6 +66,35 @@ public class TakeVitalsController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            
+        }
+    }
+    
+    private void handleSaveVitalsButtonAction(ActionEvent event) {
+        String height = heightTextField.getText();
+        String weight = weightTextField.getText();
+        String bloodPressure = bloodPressureTextField.getText();
+
+        // This is where you would typically perform validation on the input data.
+        if (validateInput(height, weight, bloodPressure)) {
+            try {
+            	// Get current user
+            	User user = CurrentUser.getCurrentUser();
+            	
+                Database db = Database.getInstance();
+                Patient p = db.loadRecord(user.getID());
+                
+                // Save vitals to patient record
+                p.setVitals(weight, height, bloodPressure);
+                db.saveRecord(p);
+                
+                Utils.showMessageDialog("Vitals saved successfully.", AlertType.INFORMATION);
+            } catch (Exception e) {
+                Utils.showMessageDialog("Failed to save vitals.", AlertType.ERROR);
+                e.printStackTrace();
+            }
+        } else {
+            Utils.showMessageDialog("Invalid input. Please enter correct vitals.", AlertType.ERROR);
         }
     }
     
@@ -78,4 +107,39 @@ public class TakeVitalsController {
 		}
     }
    
+    private void handleBackButtonAction(ActionEvent event) {
+        // Logic to navigate back, similar to the login page navigation.
+        try {
+			navigateTo("PreviousView.fxml", event);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    private void handleLogoutButtonAction(ActionEvent event) {
+        // Logic to handle logout.
+        try {
+			navigateTo("LoginView.fxml", event);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
+    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private boolean validateInput(String height, String weight, String bloodPressure) {
+        // Implement validation logic here
+        // For simplicity, let's just check they are not empty.
+        return !height.isEmpty() && !weight.isEmpty() && !bloodPressure.isEmpty();
+    }
 }
