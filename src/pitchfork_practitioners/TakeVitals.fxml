@@ -15,9 +15,9 @@
          <font>
             <Font size="21.0" />
          </font></Label>
-      <TextArea layoutX="221.0" layoutY="263.0" prefHeight="46.0" prefWidth="149.0" />
-      <TextArea layoutX="49.0" layoutY="263.0" prefHeight="46.0" prefWidth="149.0" />
-      <TextArea layoutX="394.0" layoutY="263.0" prefHeight="46.0" prefWidth="170.0" />
+      <TextArea fx:id="heightTextField" layoutX="221.0" layoutY="263.0" prefHeight="46.0" prefWidth="149.0" />
+      <TextArea fx:id="weightTextField" layoutX="49.0" layoutY="263.0" prefHeight="46.0" prefWidth="149.0" />
+      <TextArea fx:id="bloodPressureTextField" layoutX="394.0" layoutY="263.0" prefHeight="46.0" prefWidth="170.0" />
       <Label layoutX="241.0" layoutY="224.0" text="Enter height" textFill="#ff9500">
          <font>
             <Font size="21.0" />
