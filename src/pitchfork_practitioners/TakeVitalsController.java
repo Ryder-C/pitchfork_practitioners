@@ -107,10 +107,11 @@ public class TakeVitalsController {
 		}
     }
    
+    @FXML
     private void handleBackButtonAction(ActionEvent event) {
         // Logic to navigate back, similar to the login page navigation.
         try {
-			navigateTo("PreviousView.fxml", event);
+			navigateTo("NurseView.fxml", event);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
