@@ -8,17 +8,17 @@
 	import javafx.scene.control.Button;
 	import javafx.scene.control.Label;
 	import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
-
-
-import java.io.FileNotFoundException;
+	import javafx.scene.control.TextArea;
+	import javafx.stage.Stage;
+	import java.io.FileNotFoundException;
 	import java.io.IOException;
+	import javafx.application.Platform;
 	import javafx.event.ActionEvent;
 	
 
 	public class PatientViewPastVisitsController {
 		
+		//declarations
 		Database db = Database.getInstance();
 		Patient patient = new Patient();
 		
@@ -62,6 +62,9 @@ import java.io.FileNotFoundException;
 	    		patientIDString = CurrentUser.getCurrentUser().getID();
 	    		patient = db.loadRecord(patientIDString);
 	    		displayInfo();
+	    		Platform.runLater(() -> {
+		            isBlank();
+		        });
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,6 +72,7 @@ import java.io.FileNotFoundException;
 	    	
 	    }
 	    
+	    //gathers info and displays them in labels
 	    public void displayInfo() {
 	    	String weightString = String.format("%.2f", patient.getPatientWeight());
 	    	weightLabel.setText(weightString);
@@ -78,6 +82,7 @@ import java.io.FileNotFoundException;
 	    	pescriptionsArea.setText(patient.getPatientPrescriptionString());
 	    }
 	    
+	    //sends user back to the patient view
 	    @FXML
 	    private void pastVisitsExitButton(ActionEvent event) {
 	        try {
@@ -92,12 +97,21 @@ import java.io.FileNotFoundException;
 	        
 	    }
 	    
+	    //navigate to different scenes
 	    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
 	        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
 	        Scene scene = new Scene(root);
 	        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 	        stage.setScene(scene);
 	        stage.show();
+	    }
+	    
+	    //checks if info is not yet available
+	    public void isBlank() {
+	    	if(weightLabel.getText().equals("0.00")) {
+	    		Utils.showMessageDialog("Examination Results Not Available Yet.", AlertType.WARNING);
+	    		heightLabel.setText("0' 0\"");
+	    	}
 	    }
 	        
 	}
