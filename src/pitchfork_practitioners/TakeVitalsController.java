@@ -15,9 +15,6 @@ import java.io.IOException;
 public class TakeVitalsController {
 
     @FXML
-    private Button pastVisitsButton;
-
-    @FXML
     private Button messageCenterButton;
 
     @FXML
@@ -41,16 +38,6 @@ public class TakeVitalsController {
     @FXML
     private void initialize() {
         // Initialization code, if any.
-    }
-
-    @FXML
-    private void pastVisitsButton(ActionEvent event) {
-        try {
-			navigateTo("PatientViewPastVisits.fxml", event);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        
     }
     
     @FXML
