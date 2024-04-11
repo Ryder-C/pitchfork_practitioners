@@ -41,9 +41,30 @@ public class NursePreExaminationController {
 		// Initialization code if needed
 	}
 
+
 	@FXML
 	private void messageCenterButton(ActionEvent event) {
-
+		try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageCenterView.fxml"));
+            Parent root = loader.load();
+            MessageCenterController controller = loader.getController();
+            controller.setPreviousFXML("NurseView.fxml", "Staff"); 
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	@FXML
+	private void onActionBack(ActionEvent event) {
+	     try {
+	            navigateTo("NurseView.fxml", event);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 	}
 
 	@FXML
@@ -68,13 +89,13 @@ public class NursePreExaminationController {
 		}
     }
 
-	private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-		Parent root = fxmlLoader.load();
-		Scene scene = new Scene(root);
-		Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
-	}
+    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
 

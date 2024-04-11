@@ -49,14 +49,21 @@ public class NurseViewController {
     }
 
     @FXML
-    private void handleMessageCenterButtonAction() {
-        // Handle the message center button click
+    private void handleMessageCenterButtonAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageCenterView.fxml"));
+            Parent root = loader.load();
+            MessageCenterController controller = loader.getController();
+            controller.setPreviousFXML("NurseView.fxml", "Staff"); 
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    private void handleBackButtonAction() {
-        // Handle the back button click
-    }
 
     @FXML
     private void handleLogoutButtonAction(ActionEvent event) {
@@ -86,13 +93,13 @@ public class NurseViewController {
     }
     
     private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-		Parent root = fxmlLoader.load();
-		Scene scene = new Scene(root);
-		Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
-	}
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
 
     

@@ -55,6 +55,9 @@ public class MessageCenterController {
             
         else if ("PatientView.fxml".equals(previousFXML)) {
             populateAccordionPatient();
+        }
+            else if ("NurseView.fxml".equals(previousFXML)) {
+                populateAccordionDoctorNurse();
         	} else {
                 populateAccordionDoctorNurse();
         	}
@@ -69,7 +72,6 @@ public class MessageCenterController {
     	patientsAccordion.getPanes().clear(); 
         
         TitledPane doctorPane = new TitledPane("Doctor", createButton("Doctor"));
-        
         TitledPane nursePane = new TitledPane("Nurse", createButton("Nurse"));
         
         patientsAccordion.getPanes().addAll(doctorPane, nursePane);
@@ -118,11 +120,14 @@ public class MessageCenterController {
         String messageText = chatTextArea.getText();
         
         if("DoctorView.fxml".equals(this.previousFXML)) {
-             senderID = "Staff"; 
+             senderID = "Doctor"; 
         	 receiverID = patientReceiverID;
         	} else if ("PatientView.fxml".equals(this.previousFXML)) {
         	 senderID = currentUserID; 
              receiverID = staffReceiverID;
+        	}else if ("NurseView.fxml".equals(this.previousFXML)) {
+        	 senderID = "Nurse"; 
+             receiverID = patientReceiverID;
         	}
         
         System.out.println(messageText);
