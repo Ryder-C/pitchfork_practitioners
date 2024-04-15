@@ -15,9 +15,9 @@
       <Label layoutX="29.0" layoutY="153.0" text="Patient Information:" textFill="#ffcf00" />
       <Label layoutX="290.0" layoutY="153.0" text="Enter Allergies:" textFill="#ffcf00" />
       <Label layoutX="557.0" layoutY="153.0" text=" Enter Concerns:" textFill="#ffcf00" />
-      <TextArea layoutX="29.0" layoutY="177.0" prefHeight="287.0" prefWidth="211.0" />
-      <TextArea layoutX="290.0" layoutY="177.0" prefHeight="287.0" prefWidth="202.0" />
-      <TextArea layoutX="557.0" layoutY="177.0" prefHeight="287.0" prefWidth="202.0" />
-      <Button layoutX="371.0" layoutY="486.0" mnemonicParsing="false" text="Save" />
+      <TextArea fx:id="patientInfoTextArea" layoutX="29.0" layoutY="177.0" prefHeight="287.0" prefWidth="211.0" />
+      <TextArea fx:id="patientAllergiesTextArea" layoutX="290.0" layoutY="177.0" prefHeight="287.0" prefWidth="202.0" />
+      <TextArea fx:id="patientConcernsTextArea" layoutX="557.0" layoutY="177.0" prefHeight="287.0" prefWidth="202.0" />
+      <Button fx:id="saveButton" layoutX="371.0" layoutY="486.0" mnemonicParsing="false" onAction="#saveButton" text="Save" />
    </children>
 </AnchorPane>
