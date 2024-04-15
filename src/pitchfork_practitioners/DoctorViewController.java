@@ -88,7 +88,15 @@ public class DoctorViewController {
     private void sendPrescription(ActionEvent event) {
         String prescription = enterVaccineField.getText();
         String preferredPharmacy = patient.getPrefferedPharmacy();
-        patient.setPatientPrescriptionString(prescription);
+        
+        
+        try {
+        	patient.setPatientPrescriptionString(prescription);
+			db.saveRecord(patient);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         if (preferredPharmacy != null) {
             String trimmedPharmacy = preferredPharmacy.replace("Preferred Pharmacy:", "").trim();
