@@ -221,4 +221,13 @@ public class Database {
 	    }
 	}
 
+	public void clearDatabase() {
+		File databaseDir = new File(directory);
+		if (databaseDir.exists()) {
+			for (File file : databaseDir.listFiles()) {
+				file.delete();
+			}
+			databaseDir.delete();
+		}
+	}
 }

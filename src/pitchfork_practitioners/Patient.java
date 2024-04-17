@@ -115,6 +115,16 @@ public class Patient {
 		return p;
 	}
 	
+	// Override equals method for testing
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Patient) {
+			Patient p = (Patient) obj;
+			return p.patientID.equals(this.patientID);
+		}
+		return false;
+	}
+	
 	public void setVitals(String weight, String height, String bloodPressure) {
 		this.weight = weight;
 		this.height = height;
